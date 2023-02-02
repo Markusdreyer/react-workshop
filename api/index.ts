@@ -24,6 +24,7 @@ app.listen(port, () => {
 });
 
 app.post("/recipes", async (req: Request, res: Response) => {
+  console.info("Received recipe request with request body: ", req.body)
   const ingredients: [string] = req.body.ingredients;
   if(!ingredients || ingredients.length < 1) {
     const error = { message: "No ingredients provided, aborting OpenAI request"}
