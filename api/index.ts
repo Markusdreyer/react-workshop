@@ -1,6 +1,4 @@
-import { resolveNaptr } from "dns";
 import { Request, Response } from "express";
-import { isForOfStatement } from "typescript";
 
 const express = require("express");
 const dotenv = require("dotenv");
