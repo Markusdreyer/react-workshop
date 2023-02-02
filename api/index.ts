@@ -1,4 +1,6 @@
+import { resolveNaptr } from "dns";
 import { Request, Response } from "express";
+import { isForOfStatement } from "typescript";
 
 const express = require("express");
 const dotenv = require("dotenv");
@@ -22,7 +24,13 @@ app.listen(port, () => {
 });
 
 app.post("/recipes", async (req: Request, res: Response) => {
-  const ingredients = req.body.ingredients;
+  const ingredients: [string] = req.body.ingredients;
+  if(!ingredients || ingredients.length < 1) {
+    const error = { message: "No ingredients provided, aborting OpenAI request"}
+    console.error(error.message)
+    res.status(400).send(error)
+    return
+  }
   console.log("New recipe request! Ingredients: ", ingredients);
   
   const format = `
