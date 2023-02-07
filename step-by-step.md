@@ -118,3 +118,127 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   Try using it now to see what happens when you click the button on your website.
 
 </details>
+
+## Step 2 - Add a header and center the components
+<details>
+  <summary>:wrench: Adding more components</summary>
+
+  <details>
+  <summary>:one: Adding the header</summary>
+
+  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, we want to write "`Your Name`'s Magic Cookbok". 
+  Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
+
+  For example:
+
+  ```ts
+  return (
+          <div>
+            <p> I am a child of div</p>
+            <p> I am another child of div</p>
+          </div>
+        );
+
+  ```
+
+  In this example, div is the parent element, and the two p elements are child elements. The parent element div contains and wraps around the two child elements.
+
+  Now, you can go ahead and add a parent element which wraps around our existing button.
+
+  <details>
+      <summary>:sparkles:Show solution:sparkles:</summary>
+
+    ```ts
+      return (
+          <div>
+            <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          </div>
+        );
+    ```
+  </details>
+
+
+  The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more and use more of the existing material-ui components. So we're going to use the `<Box>` component
+
+  ```ts
+  <Box>This is some text</Box>
+
+  ```
+  _Note: The text within the Box can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/system/typography/_
+
+  As the `Box`is a material-ui component, it has access to many helpful layout options. And many of these will be helpful later on, so we can go ahead and replace the parent `<div>` element with a `<Box>` component.
+  Also, in addition to adding the `YourName's Magic Cookbook`, try setting the font size of the text within the box to 26 pixels.
+
+  ```ts
+  Hint: You can access the style properties of the box component using sx, e.g.
+
+  <Box sx={{someProperty: propertyValue}}>
+  ```
+
+  <details>
+      <summary>:sparkles:Show solution:sparkles:</summary>
+
+    ```ts
+      return (
+        <Box sx={{fontSize: 26}}>
+          YourName's Magic Cookbook
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+        </Box>
+        );
+    ```
+  </details>
+  
+
+  </details>
+
+  <details>
+  <summary>:two: Centering things</summary>
+
+  <br> So now we have some properly sized text! Next up we usually don't want everything to be stuck in the upper left corner of the screen. So lets go ahead and get things more centered. There are many ways to do this, but as we already have a parent `<Box>` element, we can go ahead and use this. 
+
+  _Note: The layout within the Box can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-box/_
+
+  So our goal is to center the text and button so they appear in the middle of the screen. 
+
+  ```ts
+  Hint: You can use the textAlign and justifyContent properties. 
+  ```
+
+
+  <details>
+      <summary>:sparkles:Show solution:sparkles:</summary>
+
+    ```ts
+      return (
+        <Box sx={{fontSize: 26, textAlign: "center", justifyContent: "center"}}>
+            YourName's Magic Cookbook
+            <Button variant={"contained"} onClick={() => getRecipe()}>Get Recipe</Button>
+        </Box>
+        );
+    ```
+  </details>
+
+  Great, now things are centered! However, having the button and the header on the same line isn't ideal. Lets improve this by getting them on separate lines. 
+
+  We can do this by adding another `<Box>` component that wraps around the text you've written
+
+  <details>
+      <summary>:sparkles:Show solution:sparkles:</summary>
+
+    ```ts
+      return (
+        <Box sx={{textAlign: "center", justifyContent: "center"}}>
+            <Box sx={{fontSize: 26}}>
+            YourName's Magic Cookbook
+            </Box>
+            <Button variant={"contained"} onClick={() => getRecipe()}>Get Recipe</Button>
+        </Box>
+        );
+    ```
+  </details>
+  
+  </details>
+
+
+
+</details>
