@@ -3,7 +3,8 @@ This is a step by step guide to implementing the solution, where each step is it
 
 ## Using GIT to clone the project
 <details>
-  <summary>Cloning the project</summary>
+  <summary>:information_source:</summary>
+
 
 First we need to open up a terminal, then navigate to where we want to store the project. In this example, we'll store it in the Documents folder. 
 
@@ -21,6 +22,7 @@ First we need to open up a terminal, then navigate to where we want to store the
 <details>
   <summary>:pushpin:MacOS</summary>
 
+
   First, open up a terminal, you can do this by using Spotlight, which is the magnifying glass on the top right corner of your screen, write in `terminal` and press enter when the search is finished.
 
   When the terminal is open, write `cd ~/Documents` 
@@ -36,76 +38,85 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 ```
 </details>
 
+
 ## Running the project
 <details>
-<summary>Running the project</summary>
+  <summary>:information_source:</summary>
 
-First off, we want to start up the project, this allows us to immediately see changes and updates in the web browser as we write out code.
 
-Now we should still have the terminal or command line window open. So, we need to navigate into the project folder. This can be done by writing
+  First off, we want to start up the project, this allows us to immediately see changes and updates in the web browser as we write out code.
 
-```
-cd react-workshop
-```
+  Now we should still have the terminal or command line window open. So, we need to navigate into the project folder. This can be done by writing
 
-Now the first command you want to run is `npm install` this will install all dependencies for the project, when it is finished, you can write in `npm start`, this will start the project, and open up the web browser.
+  ```
+  cd react-workshop
+  ```
 
-Now with the web-app running, it will update as soon as you save file after having written new code, this is done by pressing `CTRL-S` for windows pcs or `Command-S` for macs.
+  Now the first command you want to run is `npm install` this will install all dependencies for the project, when it is finished, you can write in `npm start`, this will start the project, and open up the web browser.
+
+  Now with the web-app running, it will update as soon as you save file after having written new code, this is done by pressing `CTRL-S` for windows pcs or `Command-S` for macs.
 
 </details>
+
 
 ## Step 1 - A simple button and an empty function
-In this project we'll be using a component library named Material-UI, it provides us with ready made components, such as buttons, text fields and much much more. There are many such libaries available, and there's usually no need to re-invent the wheel and create buttons and other components entirely from scratch. So, with that out of the way, we'll move onto the first step.
-
-The first step is going to be to just add a simple button that uses an empty function. Lets name the function createRecipe, and use the label "Create Recipe" for the button. This should be added in the `App.tsx`-file. A button can be added using the following
-
-
-```ts
-<Button></Button>
-```
-
-
-The next step is to add a function. They are written as follows
-
-
-```ts
-const myFunction = (myParameters) => 
-  {
-    console.log("Hello world");
-  }
-```
-
-Now, we want to combine the two, and make the button call the function when it is clicked. And this button component has an onClick parameter, see if you can find out how to use this. And also, see if you can't add the label "Create Recipe" so that it is shown as text inside the button.
-
-_Note: The button can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-button/_
-
-
-
 <details>
-  <summary>:sparkles:Show solution:sparkles:</summary>
+  <summary>:one:</summary>
 
-```ts
-  import Button from '@mui/material/Button';
 
-  function App() {
+  In this project we'll be using a component library named Material-UI, it provides us with ready made components, such as buttons, text fields and much much more. There are many such libaries available, and there's usually no need to re-invent the wheel and create buttons and other components entirely from scratch. So, with that out of the way, we'll move onto the first step.
 
-      const createRecipe = () => 
-          {
-              console.log("Hello world")
-          }
+  The first step is going to be to just add a simple button that uses an empty function. Lets name the function createRecipe, and use the label "Create Recipe" for the button. This should be added in the `App.tsx`-file. A button can be added using the following
 
-      return (
-          <Button onClick={() => createRecipe()}>Create Recipe</Button>
-      );
-  }
 
-  export default App;
-```
+  ```ts
+  <Button></Button>
+  ```
+
+
+  The next step is to add a function. They are written as follows
+
+
+  ```ts
+  const myFunction = (myParameters) => 
+    {
+      console.log("Hello world");
+    }
+  ```
+
+  Now, we want to combine the two, and make the button call the function when it is clicked. And this button component has an onClick parameter, see if you can find out how to use this. And also, see if you can't add the label "Create Recipe" so that it is shown as text inside the button.
+
+  _Note: The button can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-button/_
+
+
+
+  <details>
+    <summary>:sparkles:Show solution:sparkles:</summary>
+
+  ```ts
+    import Button from '@mui/material/Button';
+
+    function App() {
+
+        const createRecipe = () => 
+            {
+                console.log("Hello world")
+            }
+
+        return (
+            <Button onClick={() => createRecipe()}>Create Recipe</Button>
+        );
+    }
+
+    export default App;
+  ```
+  </details>
+
+  Now you might be wondering what the console is. The console is a debugging tool that provides a way to view messages, inspect values, and run JavaScript code directly in a web browser or in other JavaScript environments such as Node.js.
+
+  In web development, the console is usually accessed using the JavaScript console object, which is built into the browser's developer tools. You can open the console in most modern browsers by pressing `F12` or by right-clicking on a web page and selecting `Inspect Element`. The console appears as a separate panel within the developer tools.
+
+  Once the console is open, you can use it to view output from your JavaScript code, check the values of variables, and run code directly in the console. This is useful for testing and debugging your code, as well as for exploring the behavior of JavaScript and the web platform.
+  Try using it now to see what happens when you click the button on your website.
+
 </details>
-
-Now you might be wondering what the console is. The console is a debugging tool that provides a way to view messages, inspect values, and run JavaScript code directly in a web browser or in other JavaScript environments such as Node.js.
-
-In web development, the console is usually accessed using the JavaScript console object, which is built into the browser's developer tools. You can open the console in most modern browsers by pressing `F12` or by right-clicking on a web page and selecting `Inspect Element`. The console appears as a separate panel within the developer tools.
-
-Once the console is open, you can use it to view output from your JavaScript code, check the values of variables, and run code directly in the console. This is useful for testing and debugging your code, as well as for exploring the behavior of JavaScript and the web platform.
-Try using it now to see what happens when you click the button on your website.
