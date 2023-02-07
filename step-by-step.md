@@ -1,128 +1,98 @@
 # Step by step guide
-Jeg slenger bare inn ting her mens jeg koder som jeg tenker er naturlige punkter å gå igjennom. Litt kaos til å starte med kanskje, men tror det blir enklere å komme frem til en god form på workshoppen om man skriver ned og forklarer for seg selv mens man koder opp tjenesten.
+This is a step by step guide to implementing the solution, where each step is iteratively added for each pull request. 
 
-Blå lenker betyr bare at jeg har stjålet et utdrag fra et annet sted, i påvente av en mer pedagogisk oversettelse. Er også usikker på språket. Føles mest naturlig på engelsk, og øker muligheten for enkel gjenbruk. 
+## Lets clone the project
+First we need to open up a terminal, then navigate to where we want to store the project. In this example, we'll store it in the Documents folder. 
 
-## Exploring the backend API
-We are using [Postman](https://www.postman.com/) to easily familiarize ourselves with the backend API. Postman is a fantastic tool for managing collections of HTTP requests. Click the button below to get access to a premade Postman collection.
+<details>
+  <summary>Windows</summary>
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5139293-9e062c9e-53ee-4c8a-b987-3134eb16629f?action=collection%2Ffork&collection-url=entityId%3D5139293-9e062c9e-53ee-4c8a-b987-3134eb16629f%26entityType%3Dcollection%26workspaceId%3Df8560db4-e41e-410a-961c-e4158d0e61f2)
+  First open up the file explorer and navigate to where you want to store the project. On the top of the file explorer, you'll see a path such as `C:/Users/Username/Documents` Click this with your mouse and copy the text.
 
-_Note: Import if you don't care about updates to the collection, fork it if you want future updates._
+  Now, open up a command line window, you can do this by pressing the start button, write in `cmd` and press enter when the search is finished.
 
-### Postman 
-Before attempting a request to the backend, make sure that the backend is already running. If not, see the [README](/README.md) for instructions. When the backend is up and running, click the blue "Send"-button in the Postman GUI to send a request to the backend. After a few moments, you should get a similar response to the one in the image below:
-![](/images/postman-guide.png)
-
-Try changing the ingredients list and see how it affects the response ✨
-
-## Fetching data from the backend
-Now that we've familiarized ourselves with the API, let's get our React-app underway by implementing similar fetching logic in our app instead. JavaScript has a "Fetch" API that [provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.](!https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
-
-A basic fetch request is really simple to set up. Have a look at the following code:
-
-```ts
-fetch('http://example.com/api')
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-```
-
-Here we are performing a request just like in Postman and printing it to the console. The simplest use of fetch() takes one argument — the path to the resource you want to fetch — and does not directly return the JSON response body but instead returns a promise that resolves with a Response object.
-
-This request is nice, but it is lacking one key feature: the request body. Also, this request is a simple GET request, when performing HTTP requests with a request body, a POST request is used, so we need to change that as well. Here is an example:
-
-```ts
-fetch("http://example.com/api", {
-      method: "POST",
-      body: requestBody,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-```
-
-### Encapsulating the fetch request
-Let's encapsulate this request into a function we can reuse:
-
-```ts
-//The async keyword allows us to to use "await" to perform asynchronous operations, such as communicating with the backend
-const getRecipe = async () => {
-    //Hardcoded list of ingredients. We'll come back to this later, but we need some data to work with for now.
-    const requestBody = JSON.stringify({
-        ingredients: [
-            "tomato", 
-            "mozzarella", 
-            "basil", 
-            "chiocciole pasta", 
-            "olive oil"
-        ]
-    })
-
-    await fetch("http://localhost:8000/recipes", {
-      method: "POST",
-      headers: { //We also need to tell what kind of data we're sending
-        "Content-Type": "application/json",
-      },
-      body: requestBody,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }
-```
-
-### Adding the function to our app
-Let's put this function inside our React app. Place it in the `App.tsx`-file like so: 
-```ts
-import './App.css';
-
-function App() {
+  When the command line window is open, write `cd "C:/Users/Username/Documents"` The path can be pasted in using `Ctrl-V` assuming you copied it earlier. 
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+</details>
 
-    await fetch("http://localhost:8000/recipes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: requestBody,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }
+<details>
+  <summary>MacOS</summary>
 
-  return (
-    <>
-    </>
-  );
-}
+  First, open up a terminal, you can do this by using Spotlight, which is the magnifying glass on the top right corner of your screen, write in `terminal` and press enter when the search is finished.
 
-export default App;
+  When the terminal is open, write `cd ~/Documents` 
+
+</details>
+
+Now we want to clone the project using git. This can be done using the `git clone` command with a url to the git repository. In github this can be found by pressing the green `Code` button on the repository page, and it should show the link in the popup box. We'll include it in the command here you simplify things.
+
+Use the following command 
+
+```
+git clone https://github.com/Markusdreyer/react-workshop.git
 ```
 
+## Running the project
+First off, we want to start up the project, this allows us to immediately see changes and updates in the web browser as we write out code.
 
-### Adding a button
-The function is not used yet. Let's create a button that triggers the request. Put the following inside the `return` at the bottom of the `App.tsx`-file, encapsulated by the chevrons: 
+Now we should still have the terminal or command line window open. So, we need to navigate into the project folder. This can be done by writing
+
+```
+cd react-workshop
+```
+
+Now the first command you want to run is `npm install` this will install all dependencies for the project, when it is finished, you can write in `npm start`, this will start the project, and open up the web browser.
+
+Now with the web-app running, it will update as soon as you save file after having written new code, this is done by pressing `CTRL-S` for windows pcs or `Command-S` for macs.
+
+
+### Step 1 - A simple button and an empty function
+In this project we'll be using a component library named Material-UI, it provides us with ready made components, such as buttons, text fields and much much more. There are many such libaries available, and there's usually no need to re-invent the wheel and create buttons and other components entirely from scratch. So, with that out of the way, we'll move onto the first step.
+
+The first step is going to be to just add a simple button that uses an empty function. Lets name the function createRecipe, and use the label "Create Recipe" for the button. This should be added in the `App.tsx`-file. A button can be added using the following
+
 ```ts
-return (
-    <>
-        <Button onClick={getRecipe}>Get Recipe</Button>
-    </>
-);
-    
+<Button></Button>
 ```
 
-Here we're using a Button component from Material UI, so remember to add it as a dependency at the top of the file:
-```
-import Button from '@mui/material/Button';
+The next step is to add a function. They are written as follows
+
+```ts
+const myFunction = (myParameters) => 
+  {
+    console.log("Hello world");
+  }
 ```
 
-You should now have a button in your app at the top left that looks somewhat like this:
-
-![](/images/button.png)
+Now, we want to combine the two, and make the button call the function when it is clicked. And this button component has an onClick parameter, see if you can find out how to use this. And also, see if you can't add the label "Create Recipe" so that it is shown as text inside the button.
 
 _Note: The button can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-button/_
 
-### Interacting with the button
-You should be able to click the button, but nothing will appear, as we have not yet implemented any action on the response other than logging it to the console. You can view the console by right-clicking anywhere on the page, and selecting "Inspect". This will open a separate window known as the developer console. Here, click the "Console"-tab and the response from the backend should be displayed (After a few seconds):
+<details>
+  <summary>Show solution</summary>
 
-![](/images/console.png)
+```ts
+  import Button from '@mui/material/Button';
+
+  function App() {
+
+      const createRecipe = () => 
+          {
+              console.log("Hello world")
+          }
+
+      return (
+          <Button onClick={() => createRecipe()}>Create Recipe</Button>
+      );
+  }
+
+  export default App;
+```
+</details>
+
+Now you might be wondering what the console is. The console is a debugging tool that provides a way to view messages, inspect values, and run JavaScript code directly in a web browser or in other JavaScript environments such as Node.js.
+
+In web development, the console is usually accessed using the JavaScript console object, which is built into the browser's developer tools. You can open the console in most modern browsers by pressing `F12` or by right-clicking on a web page and selecting `Inspect Element`. The console appears as a separate panel within the developer tools.
+
+Once the console is open, you can use it to view output from your JavaScript code, check the values of variables, and run code directly in the console. This is useful for testing and debugging your code, as well as for exploring the behavior of JavaScript and the web platform.
+Try using it now to see what happens when you click the button on your website.
