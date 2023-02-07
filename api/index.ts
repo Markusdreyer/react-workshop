@@ -18,12 +18,18 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at https://localhost:${port}`);
+  console.log(`[server]: Server is running at http://localhost:${port}`);
 });
 
 app.post("/recipes", async (req: Request, res: Response) => {
-  const ingredients = req.body.ingredients;
-  console.log("New recipe request! Ingredients: ", ingredients);
+  console.info("Received recipe request with request body: ", req.body)
+  const ingredients: [string] = req.body.ingredients;
+  if(!ingredients || ingredients.length < 1) {
+    const error = { message: "No ingredients provided, aborting OpenAI request"}
+    console.error(error.message)
+    res.status(400).send(error)
+    return
+  }
   
   const format = `
     {
@@ -54,7 +60,7 @@ const openAIRequest = (ingredients: Array<string>, format: string) => {
   return openai.createCompletion({
     model: "text-davinci-003",
     prompt:
-      "Create a recipe using metric measurements that uses exculsively the following ingredients, and nothing else: " +
+      "Create a recipe using metric measurements that uses exclusively the following ingredients, and nothing else: " +
       ingredients +
       "in the following format: " +
       format,
