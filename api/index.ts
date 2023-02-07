@@ -40,22 +40,26 @@ app.post("/recipes", async (req: Request, res: Response) => {
       "steps": []String,
     }
   `;
-  const response = await openAIRequest(ingredients, format);
+  try{
+    const response = await openAIRequest(ingredients, format);
 
-  if (!response) return res.send("No response from OpenAI");
-  if (!response.data) return res.send("No data from OpenAI");
-  if (response.data.choices.length < 1) return res.send("No recipe found");
-
-  const recipe = response.data.choices[0].text;
-
-  try {
-    JSON.parse(recipe);
-  } catch (e) {
-    res.send("No recipe found");
+    if (!response) return res.send("No response from OpenAI");
+    if (!response.data) return res.send("No data from OpenAI");
+    if (response.data.choices.length < 1) return res.send("No recipe found");
+  
+    const recipe = response.data.choices[0].text;
+  
+    try {
+      JSON.parse(recipe);
+    } catch (e) {
+      res.send("No recipe found");
+    }
+    res.send(recipe);
   }
-
-  res.send(recipe);
-});
+  catch(error) {
+    res.send("ChatGPT Servers are busy, please try again")
+  };
+})
 
 const openAIRequest = (ingredients: Array<string>, format: string) => {
   return openai.createCompletion({
