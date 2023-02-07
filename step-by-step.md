@@ -66,25 +66,25 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   In this project we'll be using a component library named Material-UI, it provides us with ready made components, such as buttons, text fields and much much more. There are many such libaries available, and there's usually no need to re-invent the wheel and create buttons and other components entirely from scratch. So, with that out of the way, we'll move onto the first step.
 
-  The first step is going to be to just add a simple button that uses an empty function. Lets name the function createRecipe, and use the label "Create Recipe" for the button. This should be added in the `App.tsx`-file. A button can be added using the following
+  The first step is going to be to just add a simple button with the label "Get Recipe". This needs to be placed within the `return` statement in the `App.tsx`-file. A button can be added using the following.
 
 
-  ```ts
-  <Button></Button>
+  ```js
+  <Button>MyLabel</Button>
   ```
+  
 
-
-  The next step is to add a function. They are written as follows
+  The next step is to add an empty function. A function is coded like this, but unlike the Button, it should be placed outside the return statement. Lets name the function getRecipe so it is clear what it is supposed to do.
 
 
   ```ts
-  const myFunction = (myParameters) => 
+  const myFunction = () => 
     {
       console.log("Hello world");
     }
   ```
 
-  Now, we want to combine the two, and make the button call the function when it is clicked. And this button component has an onClick parameter, see if you can find out how to use this. And also, see if you can't add the label "Create Recipe" so that it is shown as text inside the button.
+  Now, we want to combine the two, and make the button call/use the function when it is clicked. And this button component has an onClick parameter, see if you can find out how to use this.
 
   _Note: The button can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-button/_
 
@@ -98,13 +98,13 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
     function App() {
 
-        const createRecipe = () => 
+        const getRecipe = () => 
             {
                 console.log("Hello world")
             }
 
         return (
-            <Button onClick={() => createRecipe()}>Create Recipe</Button>
+            <Button onClick={() => getRecipe()}>Get Recipe</Button>
         );
     }
 
