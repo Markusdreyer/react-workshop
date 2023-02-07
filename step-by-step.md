@@ -3,7 +3,7 @@ This is a step by step guide to implementing the solution, where each step is it
 
 ## Using GIT to clone the project
 <details>
-  <summary>:information_source:</summary>
+  <summary>:hand: Cloning the Project :hand:</summary>
 
 
 First we need to open up a terminal, then navigate to where we want to store the project. In this example, we'll store it in the Documents folder. 
@@ -41,7 +41,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
 ## Running the project
 <details>
-  <summary>:information_source:</summary>
+  <summary>:runner: Runnng the Project :runner:</summary>
 
 
   First off, we want to start up the project, this allows us to immediately see changes and updates in the web browser as we write out code.
@@ -61,7 +61,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
 ## Step 1 - A simple button and an empty function
 <details>
-  <summary>:one:</summary>
+  <summary>:one: Step 1 :one:</summary>
 
 
   In this project we'll be using a component library named Material-UI, it provides us with ready made components, such as buttons, text fields and much much more. There are many such libaries available, and there's usually no need to re-invent the wheel and create buttons and other components entirely from scratch. So, with that out of the way, we'll move onto the first step.
