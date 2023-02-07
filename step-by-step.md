@@ -78,8 +78,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
 
   ```ts
-  const myFunction = () => 
-    {
+  const myFunction = () => {
       console.log("Hello world");
     }
   ```
@@ -98,8 +97,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
     function App() {
 
-        const getRecipe = () => 
-            {
+        const getRecipe = () => {
                 console.log("Hello world")
             }
 
