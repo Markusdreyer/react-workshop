@@ -282,5 +282,89 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 ## Step 3 - Querying the backend
 <details>
   <summary>:wrench: How to query </summary>
+  
+  Now let's get our React-app underway by implementing fetching logic in our app. JavaScript has a "Fetch" API that [provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.](!https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+A basic fetch request is really simple to set up. Have a look at the following code:
+
+```ts
+fetch('http://example.com/api')
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+```
+
+Here we are performing a request to an API at 'http://example.com/api' and printing the response to the console. The simplest use of fetch() takes one argument — the path to the resource you want to fetch — and does not directly return the JSON response body but instead returns a promise that resolves with a Response object.
+
+This request is nice, but it is lacking one key feature: the request body. Also, this request is a simple GET request, when performing HTTP requests with a request body, a POST request is used, so we need to change that as well. Here is an example:
+
+```ts
+fetch("http://example.com/api", {
+      method: "POST",
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+```
+
+### Encapsulating the fetch request
+Let's encapsulate this request into a function we can reuse:
+
+```ts
+//The async keyword allows us to to use "await" to perform asynchronous operations, such as communicating with the backend
+const getRecipe = async () => {
+    //Hardcoded list of ingredients. We'll come back to this later, but we need some data to work with for now.
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
+    await fetch("http://localhost:8000/recipes", {
+      method: "POST",
+      headers: { //We also need to tell what kind of data we're sending
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
+```
+
+### Adding the function to our app
+Let's put this function inside our React app. 
+```ts
+import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
+
+function App() {
+  
+  const getRecipe = async () => {
+    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+    await fetch("http://localhost:8000/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
+  
+  return (
+      <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
+          <Box sx={{fontSize: 26, paddingBottom: 2}}>
+          YourName's Magic Cookbook
+          </Box>
+          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+      </Box>
+  );
+}
+export default App;
+```
 
 </details>
