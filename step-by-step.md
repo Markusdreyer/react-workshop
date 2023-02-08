@@ -25,7 +25,7 @@ This is a step by step guide to implementing the solution, where each step is it
 
 First, open up a terminal, you can do this by using Spotlight, which is the magnifying glass on the top right corner of your screen, write in `terminal` and press enter when the search is finished.
 
-  When the terminal is open, write `cd ~/Documents` 
+  When the terminal is open, navigate to a suitable place to clone the repo, such as in the `Documents` folder: `cd ~/Documents`
 
 </details>
 
