@@ -145,17 +145,18 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   Now, you can go ahead and add a parent element which wraps around our existing button.
 
-  <details>
-      <summary>:sparkles:Show solution:sparkles:</summary>
+<details>
+    <summary>:sparkles:Show solution:sparkles:</summary>
 
-    ```ts
-      return (
-          <div>
-            <Button onClick={() => getRecipe()}>Get Recipe</Button>
-          </div>
-        );
-    ```
-  </details>
+
+  ```ts
+    return (
+        <div>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+        </div>
+      );
+  ```
+</details>
 
 
   The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more and use more of the existing material-ui components. So we're going to use the `<Box>` component
@@ -175,18 +176,19 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   <Box sx={{someProperty: propertyValue}}>
   ```
 
-  <details>
-      <summary>:sparkles:Show solution:sparkles:</summary>
+<details>
+    <summary>:sparkles:Show solution:sparkles:</summary>
 
-    ```ts
-      return (
-        <Box sx={{fontSize: 26}}>
-          YourName's Magic Cookbook
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
-        </Box>
-        );
-    ```
-  </details>
+
+  ```ts
+    return (
+      <Box sx={{fontSize: 26}}>
+        YourName's Magic Cookbook
+        <Button onClick={() => getRecipe()}>Get Recipe</Button>
+      </Box>
+      );
+  ```
+</details>
   
 
   </details>
@@ -205,69 +207,69 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   ```
 
 
-  <details>
-      <summary>:sparkles:Show solution:sparkles:</summary>
+<details>
+    <summary>:sparkles:Show solution:sparkles:</summary>
 
-    ```ts
-      return (
-        <Box sx={{fontSize: 26, textAlign: "center", justifyContent: "center"}}>
-            YourName's Magic Cookbook
-            <Button variant={"contained"} onClick={() => getRecipe()}>Get Recipe</Button>
-        </Box>
-        );
-    ```
-  </details>
+  ```ts
+    return (
+      <Box sx={{fontSize: 26, textAlign: "center", justifyContent: "center"}}>
+          YourName's Magic Cookbook
+          <Button variant={"contained"} onClick={() => getRecipe()}>Get Recipe</Button>
+      </Box>
+      );
+  ```
+</details>
 
   Great, now things are centered! However, having the button and the header on the same line isn't ideal. Lets improve this by getting them on separate lines. 
 
   We can do this by adding another `<Box>` component that wraps around the text you've written, try doing this now.
 
-  <details>
-      <summary>:sparkles:Show solution:sparkles:</summary>
+<details>
+    <summary>:sparkles:Show solution:sparkles:</summary>
 
-    ```ts
-      return (
-        <Box sx={{textAlign: "center", justifyContent: "center"}}>
-            <Box sx={{fontSize: 26}}>
-            YourName's Magic Cookbook
-            </Box>
-            <Button onClick={() => getRecipe()}>Get Recipe</Button>
-        </Box>
-        );
-    ```
-  </details>
+  ```ts
+    return (
+      <Box sx={{textAlign: "center", justifyContent: "center"}}>
+          <Box sx={{fontSize: 26}}>
+          YourName's Magic Cookbook
+          </Box>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+      </Box>
+      );
+  ```
+</details>
 
   
   Perfect, now last thing we might notice is that things are looking a bit cramped, and also, the button doesn't reaally look like a button yet. Lets do something about this. First off, we want to add a bit of padding to both the `<Box>` components we have. To make things less cramped we can use the `padding` and `paddingBottom / paddingTop` styling properties. 
   
   And the `<Button>` component has the built in property `variant` try adding this to the button, it accepts a few predefined options namely `text | outlined | contained` try these out and find one that you like.
 
-  <details>
-      <summary>:sparkles:Show step 2 final solution:sparkles:</summary>
+<details>
+    <summary>:sparkles:Show step 2 final solution:sparkles:</summary>
 
-    ```ts
-      import { Box } from '@mui/material';
-      import Button from '@mui/material/Button';
+  ```ts
+    import { Box } from '@mui/material';
+    import Button from '@mui/material/Button';
 
-      function App() {
+    function App() {
 
-          const getRecipe = () => {
-                  console.log("Hello world")
-              }
+        const getRecipe = () => {
+                console.log("Hello world")
+            }
 
-              return (
-                  <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
-                      <Box sx={{fontSize: 26, paddingBottom: 2}}>
-                      YourName's Magic Cookbook
-                      </Box>
-                      <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
-                  </Box>
-              );
-      }
+            return (
+                <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
+                    <Box sx={{fontSize: 26, paddingBottom: 2}}>
+                    YourName's Magic Cookbook
+                    </Box>
+                    <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+                </Box>
+            );
+    }
 
-      export default App;
-    ```
-  </details>
+    export default App;
+  ```
+</details>
 
   All right, now we've finished adding the header, and improving the layout a bit! Next step, we'll start having the button do something.
   
