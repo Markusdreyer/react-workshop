@@ -339,6 +339,8 @@ Now try adding this in your App.tsx file, and check the console output after try
   
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
+  
+  
 ```ts
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
