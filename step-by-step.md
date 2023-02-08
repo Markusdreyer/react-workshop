@@ -123,6 +123,8 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 <details>
   <summary>:wrench: Adding more components</summary>
 
+  <br>
+
   <details>
   <summary>:one: Adding the header</summary>
 
