@@ -57,7 +57,7 @@ app.post("/recipes", async (req: Request, res: Response) => {
     res.send(recipe);
   }
   catch(error) {
-    res.send("ChatGPT Servers are busy, please try again")
+    res.send("OpenAI servers are busy, please try again")
   };
 })
 
