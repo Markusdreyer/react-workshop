@@ -220,7 +220,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   Great, now things are centered! However, having the button and the header on the same line isn't ideal. Lets improve this by getting them on separate lines. 
 
-  We can do this by adding another `<Box>` component that wraps around the text you've written
+  We can do this by adding another `<Box>` component that wraps around the text you've written, try doing this now.
 
   <details>
       <summary>:sparkles:Show solution:sparkles:</summary>
@@ -231,11 +231,45 @@ git clone https://github.com/Markusdreyer/react-workshop.git
             <Box sx={{fontSize: 26}}>
             YourName's Magic Cookbook
             </Box>
-            <Button variant={"contained"} onClick={() => getRecipe()}>Get Recipe</Button>
+            <Button onClick={() => getRecipe()}>Get Recipe</Button>
         </Box>
         );
     ```
   </details>
+
+  
+  Perfect, now last thing we might notice is that things are looking a bit cramped, and also, the button doesn't reaally look like a button yet. Lets do something about this. First off, we want to add a bit of padding to both the `<Box>` components we have. To make things less cramped we can use the `padding` and `paddingBottom / paddingTop` styling properties. 
+  
+  And the `<Button>` component has the built in property `variant` try adding this to the button, it accepts a few predefined options namely `text | outlined | contained` try these out and find one that you like.
+
+  <details>
+      <summary>:sparkles:Show step 2 final solution:sparkles:</summary>
+
+    ```ts
+      import { Box } from '@mui/material';
+      import Button from '@mui/material/Button';
+
+      function App() {
+
+          const getRecipe = () => {
+                  console.log("Hello world")
+              }
+
+              return (
+                  <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
+                      <Box sx={{fontSize: 26, paddingBottom: 2}}>
+                      YourName's Magic Cookbook
+                      </Box>
+                      <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+                  </Box>
+              );
+      }
+
+      export default App;
+    ```
+  </details>
+
+  All right, now we've finished adding the header, and improving the layout a bit! Next step, we'll start having the button do something.
   
   </details>
 

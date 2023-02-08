@@ -1,16 +1,14 @@
-import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 
-  function App() {
+function App() {
 
-      const getRecipe = () => 
-          {
-              console.log("Hello world")
-          }
+    const getRecipe = () => {
+            console.log("Hello world")
+        }
 
-      return (
+    return (
         <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      );
-  }
+    );
+}
 
-  export default App;
+export default App;
