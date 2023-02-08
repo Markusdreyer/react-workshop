@@ -335,7 +335,10 @@ const getRecipe = async () => {
 ```
 
 ### Adding the function to our app
-Let's put this function inside our React app. 
+Now try adding this in your App.tsx file, and check the console output after trying to click the button (It might take a few seconds-half a minute before you get a result, depending on the server!)
+  
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
 ```ts
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -368,3 +371,4 @@ export default App;
 ```
 
 </details>
+<details>
