@@ -133,7 +133,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   For example:
 
-  ```ts
+  ```tsx
   return (
           <div>
             <p> I am a child of div</p>
@@ -163,7 +163,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more and use more of the existing material-ui components. So we're going to use the `<Box>` component
 
-  ```ts
+  ```tsx
   <Box>This is some text</Box>
 
   ```
