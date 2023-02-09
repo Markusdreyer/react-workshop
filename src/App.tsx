@@ -8,11 +8,9 @@ function App() {
         }
 
         return (
-            <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
-                <Box sx={{fontSize: 26, paddingBottom: 2}}>
+            <Box>
                 YourName's Magic Cookbook
-                </Box>
-                <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+                <Button onClick={() => getRecipe()}>Get Recipe</Button>
             </Box>
         );
 }
