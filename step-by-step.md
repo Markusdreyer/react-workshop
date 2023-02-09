@@ -374,3 +374,29 @@ export default App;
 
 </details>
 </details>
+    
+## Step 4 - State management and presenting the results
+<details>
+  <summary>:wrench: States and results </summary>
+  
+  <br> In React, "state" is a way to store and manage component-level data that affects the behavior and render of a component. It is an object that holds data that can change over time, and it is an essential part of building dynamic and interactive user interfaces. It might sound a bit complicated, but it's actually not that hard to use. So lets get going with an example
+  
+```ts
+function Counter() {
+  const [counter, setCounter] = useState(0);
+  
+  return (
+    <Box>
+      {counter}
+      <Button onClick={setCounter(counter + 1)}>Count</Button>
+    </Box>
+  )
+}
+```
+Now, in this example we have the state counter, and a setter for this state named setCounter, and the counter is initialized using `useState(0)` which initializes the state with the value 0. 
+
+So in the browser, this would show the number 0, and a button labeled Count, and each click of the button would set a new state, this state is based on the previous state and adds 1 to this. And as it is a state, React knows that it should update the render (what is shown) when the value changes. 
+
+Now, we're going to have a state which is a biit more complex, as it needs to hold a recipe which is built up of a few separate parts.
+    
+</details>
