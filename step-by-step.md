@@ -128,7 +128,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   <details>
   <summary>:one: Adding the header</summary>
 
-  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, we want to write "`Your Name`'s Magic Cookbok". 
+  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, for example "`Your Name`'s Magic Cookbok". 
   Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
 
   For example:
