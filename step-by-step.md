@@ -465,7 +465,7 @@ Now, you can go ahead and try to implement the Recipe function in its entirety. 
   
 To test your solution you can use this example data
   
-```
+```ts
 const ExampleRecipeData = {
     
   title: "Caprese Pasta",
