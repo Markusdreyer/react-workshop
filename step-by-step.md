@@ -541,3 +541,190 @@ export default Recipe;
 </details>
 
 </details>
+  
+## Step 5 - State management
+<details>
+  <summary>:wrench: Presenting the results </summary>
+  
+<br> In React, "state" is a way to store and manage component-level data that affects the behavior and render of a component. It is an object that holds data that can change over time, and it is an essential part of building dynamic and interactive user interfaces. It might sound a bit complicated, but it's actually not that hard to use. So lets get going with an example
+  
+```ts
+function Counter() {
+  const [counter, setCounter] = useState(0);
+  
+  return (
+    <Box>
+      {counter}
+      <Button onClick={setCounter(counter + 1)}>Count</Button>
+    </Box>
+  )
+}
+```
+  
+<br>Now, in this example we have the state `counter`, and a setter for this state named `setCounter`. The `counter` is initialized using `useState(0)` which initializes the state with the value 0. 
+
+So in the browser, this would show the number 0, and a button labeled Count, and each click of the button would set a new state, this state is based on the previous state and adds 1 to this. And as it is a state, React knows that it should update the render (what is shown) when the value changes. 
+
+What we want in our application is to have a recipe state. Lets see an example of how this can look
+
+```ts
+import { useState } from 'react';
+import { RecipeData } from './components/Recipe'
+  
+function App() {
+  const [recipe, setRecipe] = useState({} as RecipeData)
+}
+```
+  
+Try adding this to your code in the `App.tsx` file now.
+  
+Next up we want to actually set the recipe state when we get some data back from pressing the button, instead of just logging it to the console. See if you can figure out how to do this.
+  
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+```ts
+import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
+import { RecipeData } from './components/Recipe';
+import { useState } from 'react';
+
+function App() {
+  const [recipe, setRecipe] = useState({} as RecipeData)
+  
+  const getRecipe = async () => {
+    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+    await fetch("http://localhost:8000/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => setRecipe(data));
+  }
+  
+  return (
+      <Box>
+          YourName's Magic Cookbook
+          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+      </Box>
+  );
+}
+export default App;
+    
+```
+</details>
+  
+So, next we want to use the actual recipe data! Lets use our Recipe component and pass the needed props to it. The component can be used like this
+  
+```ts
+  <Recipe title={recipe.title} description={recipe.description}....../>
+  
+  Notice that we are writing this as <Recipe ... /> instead of <Recipe ...></Recipe>
+  This is just a simplification and can make the code cleaner and easier to read when no props are passed 
+```
+  
+Now try implementing this yourself!
+  
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+```ts
+import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
+import Recipe, { RecipeData } from './components/Recipe';
+import { useState } from 'react';
+
+function App() {
+  const [recipe, setRecipe] = useState({} as RecipeData)
+  
+  const getRecipe = async () => {
+    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+    await fetch("http://localhost:8000/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => setRecipe(data));
+  }
+  
+  return (
+      <Box>
+          YourName's Magic Cookbook
+          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Recipe title={recipe.title} description={recipe.description} ingredients={recipe.ingredients} steps={recipe.steps}/>
+      </Box>
+  );
+}
+export default App;
+```
+  
+</details>
+  
+Now you might notice nothing is showing up in the browser anymore, this is due to the Recipe receiving null values, as the title, description and so on haven't been initialized. We'll sort this out using something called conditional rendering, basically an `if` statement.
+  
+```ts
+  {recipe.title && <Recipe ......./>}
+  
+  In essence this means 
+  
+  if (recipe.title != null){
+    return <Recipe ......></Recipe>
+  }
+```
+
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+```ts
+import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
+import Recipe, { RecipeData } from './components/Recipe';
+import { useState } from 'react';
+
+function App() {
+  const [recipe, setRecipe] = useState({} as RecipeData)
+  
+  const getRecipe = async () => {
+    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+    await fetch("http://localhost:8000/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => setRecipe(data));
+  }
+  
+  return (
+      <Box>
+          YourName's Magic Cookbook
+          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          {recipe.title && 
+            <Recipe 
+              title={recipe.title} 
+              description={recipe.description} 
+              ingredients={recipe.ingredients} 
+              steps={recipe.steps}
+            />
+          }
+      </Box>
+  );
+}
+export default App;
+
+```
+  
+</details>
+
+Perfect, now you've learned a little bit about state management as well! Next up, we'll add a new component with inputs, and another state to change the ingredients we're using.
+  
+</details>
+
