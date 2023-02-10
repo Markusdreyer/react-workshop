@@ -503,6 +503,8 @@ function Recipe(props: RecipeData){
         </Box>
     )
 }
+  
+export default Recipe;
     
 ```
 </details>
