@@ -275,7 +275,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
       </Box>
   );
 }
