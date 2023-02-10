@@ -393,10 +393,83 @@ function Counter() {
   )
 }
 ```
-Now, in this example we have the state counter, and a setter for this state named setCounter, and the counter is initialized using `useState(0)` which initializes the state with the value 0. 
+Now, in this example we have the state `counter`, and a setter for this state named `setCounter`. The `counter` is initialized using `useState(0)` which initializes the state with the value 0. 
 
 So in the browser, this would show the number 0, and a button labeled Count, and each click of the button would set a new state, this state is based on the previous state and adds 1 to this. And as it is a state, React knows that it should update the render (what is shown) when the value changes. 
 
-Now, we're going to have a state which is a biit more complex, as it needs to hold a recipe which is built up of a few separate parts.
-    
+Now, we're going to have a state which is a biit more complex, as it needs to hold a recipe which is built up of a few separate parts. But, first things first, we want to create a new component for recipe related things. First, create a folder named `components` under the `src` folder. If you're using Visual Studio Code, you can right click the `src` directory and click create new folder. Now right click the `components` folder and click create new file, lets name this new file Recipe.tsx 
+
+Next up, we'll have a look at how the data in the recipe is structured.
+
+```
+{
+    "title": "Caprese Pasta",
+    "description": "A delicious and simple pasta dish featuring the classic Italian flavors of tomato, mozzarella, and basil.",
+    "ingredients": [
+        "2 cups of cherry tomatoes, halved",
+        "1 cup of mozzarella, cubed",
+        "1/4 cup of fresh basil, chopped",
+        "250 grams of chiocciole pasta",
+        "3 tablespoons of olive oil"
+    ],
+    "steps": [
+        "Bring a large pot of salted water to a boil.",
+        "Add the chiocciole pasta and cook for 8-10 minutes, or until al dente.",
+        "Drain the pasta and set aside.",
+        "In a large bowl, combine the halved tomatoes, cubed mozzarella, and chopped basil.",
+        "Add the cooked pasta to the bowl and mix to combine.",
+        "Drizzle the olive oil over the pasta and mix until all the ingredients are evenly coated.",
+        "Serve the pasta warm or cold."
+    ]
+}
+```
+
+We can see here that we're dealing with a structure such as this
+  
+```
+title: string,
+description: string,
+ingredients: string[]
+steps: string[]
+```
+  
+So to be able to use a state for multiple fields, we usually have to use a state object structure. Now, we're going to use this object structure in multiple components, in both our App.tsx and our Recipe.tsx components. When we need to use it in several places, or it is a larger object structure it is often helpful to create an interface that defines the structure. See an example of an interface below.
+  
+```
+interface interfaceName{
+  propertyName1: propertyType1
+  propertyName2: propertyType2
+}
+  
+To use this interface in other components, we usually have to add an export before the interface, e.g.
+  
+export interface InterfaceName {
+  .....
+}
+  
+```
+
+Now, go ahead and try creating an interface for the recipe, lets name it RecipeObject
+  
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+```
+  
+export interface RecipeData{
+  title: string
+  description: string
+  ingredients: string[]
+  steps: string[]
+}
+```
+  
+Next up, we'll create the actual component! 
+  
+```
+  
+```
+
+</details>
+  
 </details>
