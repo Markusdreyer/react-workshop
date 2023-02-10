@@ -275,7 +275,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
       </Box>
   );
 }
@@ -608,7 +608,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
       </Box>
   );
 }
@@ -656,7 +656,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
           <Recipe title={recipe.title} description={recipe.description} ingredients={recipe.ingredients} steps={recipe.steps}/>
       </Box>
   );
@@ -706,7 +706,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
           {recipe.title && 
             <Recipe 
               title={recipe.title} 
