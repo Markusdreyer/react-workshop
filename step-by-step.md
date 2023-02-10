@@ -728,7 +728,7 @@ Perfect, now you've learned a little bit about state management as well! Next up
   
 </details>
   
-## Step 5 - Autocomplete component and input
+## Step 6 - Autocomplete component and input
 <details>
   <summary>:wrench: Time for some input </summary>
   
