@@ -1,7 +1,10 @@
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
+import Recipe, { RecipeData } from './components/Recipe';
+import { useState } from 'react';
 
 function App() {
+  const [recipe, setRecipe] = useState({} as RecipeData)
   
   const getRecipe = async () => {
     const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
@@ -13,13 +16,21 @@ function App() {
       body: requestBody,
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => setRecipe(data));
   }
   
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          {recipe.title && 
+            <Recipe 
+              title={recipe.title} 
+              description={recipe.description} 
+              ingredients={recipe.ingredients} 
+              steps={recipe.steps}
+            />
+          }
       </Box>
   );
 }
