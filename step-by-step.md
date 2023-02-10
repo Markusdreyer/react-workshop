@@ -123,12 +123,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 <details>
   <summary>:wrench: Adding more components</summary>
 
-  <br>
-
-  <details>
-  <summary>:one: Adding the header</summary>
-
-  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, we want to write "`Your Name`'s Magic Cookbok". 
+  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, for example "`Your Name`'s Magic Cookbok". 
   Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
 
   For example:
@@ -161,22 +156,15 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 </details>
 
 
-  The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more and use more of the existing material-ui components. So we're going to use the `<Box>` component
+  The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more later on and use more of the existing material-ui components. So we're going to use the `<Box>` component
 
   ```ts
   <Box>This is some text</Box>
 
   ```
-  _Note: The text within the Box can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/system/typography/_
 
   As the `Box`is a material-ui component, it has access to many helpful layout options. And many of these will be helpful later on, so we can go ahead and replace the parent `<div>` element with a `<Box>` component.
-  Also, in addition to adding the `YourName's Magic Cookbook`, try setting the font size of the text within the box to 26 pixels.
-
-  ```ts
-  Hint: You can access the style properties of the box component using sx, e.g.
-
-  <Box sx={{someProperty: propertyValue}}>
-  ```
+   Also go ahead and add `YourName's Magic Cookbook`
 
 <details>
     <summary>:sparkles:Show solution:sparkles:</summary>
@@ -184,7 +172,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   ```ts
     return (
-      <Box sx={{fontSize: 26}}>
+      <Box>
         YourName's Magic Cookbook
         <Button onClick={() => getRecipe()}>Get Recipe</Button>
       </Box>
@@ -192,90 +180,11 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   ```
 </details>
   
+All right, now we've finished adding the header! Next step, we'll start having the button do something.
 
-  </details>
-
-  <details>
-  <summary>:two: Centering things</summary>
-
-  <br> So now we have some properly sized text! Next up we usually don't want everything to be stuck in the upper left corner of the screen. So lets go ahead and get things more centered. There are many ways to do this, but as we already have a parent `<Box>` element, we can go ahead and use this. 
-
-  _Note: The layout within the Box can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-box/_
-
-  So our goal is to center the text and button so they appear in the middle of the screen. 
-
-  ```ts
-  Hint: You can use the textAlign and justifyContent properties. 
-  ```
-
-
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-  ```ts
-    return (
-      <Box sx={{fontSize: 26, textAlign: "center", justifyContent: "center"}}>
-          YourName's Magic Cookbook
-          <Button variant={"contained"} onClick={() => getRecipe()}>Get Recipe</Button>
-      </Box>
-      );
-  ```
 </details>
 
-  Great, now things are centered! However, having the button and the header on the same line isn't ideal. Lets improve this by getting them on separate lines. 
 
-  We can do this by adding another `<Box>` component that wraps around the text you've written, try doing this now.
-
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-  ```ts
-    return (
-      <Box sx={{textAlign: "center", justifyContent: "center"}}>
-          <Box sx={{fontSize: 26}}>
-          YourName's Magic Cookbook
-          </Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      </Box>
-      );
-  ```
-</details>
-
-  
-  Perfect, now last thing we might notice is that things are looking a bit cramped, and also, the button doesn't reaally look like a button yet. Lets do something about this. First off, we want to add a bit of padding to both the `<Box>` components we have. To make things less cramped we can use the `padding` and `paddingBottom / paddingTop` styling properties. 
-  
-  And the `<Button>` component has the built in property `variant` try adding this to the button, it accepts a few predefined options namely `text | outlined | contained` try these out and find one that you like.
-
-<details>
-    <summary>:sparkles:Show step 2 final solution:sparkles:</summary>
-
-  ```ts
-    import { Box } from '@mui/material';
-    import Button from '@mui/material/Button';
-
-    function App() {
-
-        const getRecipe = () => {
-                console.log("Hello world")
-            }
-
-            return (
-                <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
-                    <Box sx={{fontSize: 26, paddingBottom: 2}}>
-                    YourName's Magic Cookbook
-                    </Box>
-                    <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
-                </Box>
-            );
-    }
-
-    export default App;
-  ```
-</details>
-
-  All right, now we've finished adding the header, and improving the layout a bit! Next step, we'll start having the button do something.
-  
-  </details>
 
 </details>
 
