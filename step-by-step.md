@@ -460,7 +460,36 @@ The code in the example creates an unordered list `<ul>` and uses the map method
 It might sound a bit more complex than it is, in short the list is meant to show a set of names, and it is displayed as a bullet-point list, where each name is a separate item on the list.
   
 Now, you can go ahead and try to implement the Recipe function in its entirety. What we want is something that ends up looking like this
+  
 ![Recipe Component Image](./images/recipecomponent.png)
+  
+To test your solution you can use this example data
+  
+```
+const ExampleRecipeData = {
+    
+  title: "Caprese Pasta",
+  description: "A delicious and simple pasta dish featuring the classic Italian flavors of tomato, mozzarella, and basil.",
+  ingredients: [
+      "2 cups of cherry tomatoes, halved",
+      "1 cup of mozzarella, cubed",
+      "1/4 cup of fresh basil, chopped",
+      "250 grams of chiocciole pasta",
+      "3 tablespoons of olive oil"
+  ],
+  steps: [
+      "Bring a large pot of salted water to a boil.",
+      "Add the chiocciole pasta and cook for 8-10 minutes, or until al dente.",
+      "Drain the pasta and set aside.",
+      "In a large bowl, combine the halved tomatoes, cubed mozzarella, and chopped basil.",
+      "Add the cooked pasta to the bowl and mix to combine.",
+      "Drizzle the olive oil over the pasta and mix until all the ingredients are evenly coated.",
+      "Serve the pasta warm or cold."
+  ]
+  
+}
+ 
+```
 
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
