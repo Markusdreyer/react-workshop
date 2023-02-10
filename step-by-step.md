@@ -285,35 +285,17 @@ export default App;
 </details>
 </details>
     
-## Step 4 - State management and presenting the results
+## Step 4 - Presenting the results
 <details>
-  <summary>:wrench: States and results </summary>
-  
-  <br> In React, "state" is a way to store and manage component-level data that affects the behavior and render of a component. It is an object that holds data that can change over time, and it is an essential part of building dynamic and interactive user interfaces. It might sound a bit complicated, but it's actually not that hard to use. So lets get going with an example
-  
-```ts
-function Counter() {
-  const [counter, setCounter] = useState(0);
-  
-  return (
-    <Box>
-      {counter}
-      <Button onClick={setCounter(counter + 1)}>Count</Button>
-    </Box>
-  )
-}
-```
-Now, in this example we have the state `counter`, and a setter for this state named `setCounter`. The `counter` is initialized using `useState(0)` which initializes the state with the value 0. 
+  <summary>:wrench: Presenting the results </summary>
 
-So in the browser, this would show the number 0, and a button labeled Count, and each click of the button would set a new state, this state is based on the previous state and adds 1 to this. And as it is a state, React knows that it should update the render (what is shown) when the value changes. 
-
-Now, we're going to have a state which is a biit more complex, as it needs to hold a recipe which is built up of a few separate parts. But, first things first, we want to create a new component for recipe related things. 
+Now we want to create a new component for recipe related things. 
   
 First, create a folder named `components` under the `src` folder. If you're using Visual Studio Code, you can right click the `src` directory and click create new folder and name this components. Now right click the `components` folder and click create new file, lets name this new file Recipe.tsx 
 
 Next up, we'll have a look at how the data in the recipe is structured.
 
-```
+```ts
 {
     "title": "Caprese Pasta",
     "description": "A delicious and simple pasta dish featuring the classic Italian flavors of tomato, mozzarella, and basil.",
@@ -338,7 +320,7 @@ Next up, we'll have a look at how the data in the recipe is structured.
 
 We can see here that we're dealing with a structure such as this
   
-```
+```ts
 title: string,
 description: string,
 ingredients: string[] 
@@ -347,7 +329,7 @@ steps: string[]
   
 So to be able to use a state for multiple fields, we usually have to use a state object structure. Now, we're going to use this object structure in multiple components, in both our App.tsx and our Recipe.tsx components. When we need to use it in several places, or it is a larger object structure it is often helpful to create an interface that defines the structure. See an example of an interface below.
   
-```
+```ts
 interface interfaceName{
   propertyName1: propertyType1
   propertyName2: propertyType2
@@ -366,7 +348,7 @@ Now, go ahead and try creating an interface for the recipe, lets name it RecipeO
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```
+```ts
 export interface RecipeData{
   title: string
   description: string
@@ -379,7 +361,7 @@ export interface RecipeData{
   
 Next up, we'll create the actual component! Lets start with something along these lines
   
-```
+```ts
 import { Box } from "@mui/material";
 
 function Recipe(){
@@ -394,7 +376,8 @@ function Recipe(){
 Now, we need this Recipe component to actually receive RecipeData, it does this through the use of something called `props`. In React, `props` (short for "properties") is a way to pass data from a parent component to its child components. Props are used to customize the behavior and render of a component by providing it with external data.
 
 See the example below to see how a prop is received by a component.
-```
+  
+```ts
 function MyTitleFunction(props: {title: string){
   <Box>
     {props.title}
@@ -405,7 +388,7 @@ function MyTitleFunction(props: {title: string){
   
 This works slightly different when using an interface for the prop, as all the types and property names are already defined. So when using an interface it might look a bit like this
 
-```
+```ts
 interface MyTitleInterface{
   title: string
 }
@@ -422,7 +405,7 @@ So, now you can try to make use of the RecipeData interface and pass this as a p
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```
+```ts
 import { Box } from "@mui/material";
 
 export interface RecipeData{
@@ -444,8 +427,9 @@ function Recipe(props: RecipeData){
 
 Right, now we want to make use of all the properties that are passed in, this is simple for the single string properties, but requires some mapping when it comes to Lists or Arrays, e.g. when we have multiple ingredients or steps. So lets take a look at an example of how to map a list of strings.
   
-```
+```ts
 Lets say we have this list of names
+  
 interface NamesData {
   names: ["Hanna-Kai", "Hege", "Jack", "Markus"]
 }
@@ -479,7 +463,7 @@ Now, you can go ahead and try to implement the Recipe function in its entirety. 
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```
+```ts
 import { Box } from "@mui/material";
 
 export interface RecipeData{
@@ -492,10 +476,34 @@ export interface RecipeData{
 function Recipe(props: RecipeData){
     return (
         <Box>
-            {props.title}
+            <Box>
+                {props.title}
+            </Box>
+            <Box>
+                {props.description}
+            </Box>
+            <Box>
+                <ul>
+                    {props.ingredients.map((element, index) => (
+                        <li key={index}>
+                            {element}
+                        </li>
+                    ))}
+                </ul>
+            </Box>
+            <Box>
+                <ul>
+                    {props.steps.map((element, index) => (
+                        <li key={index}>
+                            {element}
+                        </li>
+                    ))}
+                </ul>
+            </Box>
         </Box>
     )
 }
+    
 ```
 </details>
 
