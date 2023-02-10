@@ -732,6 +732,24 @@ Perfect, now you've learned a little bit about state management as well! Next up
 <details>
   <summary>:wrench: Time for some input </summary>
   
-  <br> So now we're finally going to add some more interactivity by using an autocomplete component! 
+<br> So now we're finally going to add some more interactivity by using an autocomplete component! 
+We won't go into details regarding the Autocomplete component, and will focus only on what we need to use. You can see an example of how it can be used below
+
+```ts
+<Autocomplete 
+  multiple // Allows you to select multiple items
+  filterSelectedOptions // Filters out selected items
+  disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
+  options={["tomato", "mozarella"]} // The options shown in the dropdown menu
+  onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
+    setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
+  }}
+  renderInput={(params) => (
+    <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
+  )
+}/>
+```
+
+  
   
 </details>
