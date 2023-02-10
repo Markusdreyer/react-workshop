@@ -727,4 +727,11 @@ export default App;
 Perfect, now you've learned a little bit about state management as well! Next up, we'll add a new component with inputs, and another state to change the ingredients we're using.
   
 </details>
-
+  
+## Step 5 - Autocomplete component and input
+<details>
+  <summary>:wrench: Time for some input </summary>
+  
+  <br> So now we're finally going to add some more interactivity by using an autocomplete component! 
+  
+</details>
