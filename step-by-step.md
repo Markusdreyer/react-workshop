@@ -460,7 +460,7 @@ The code in the example creates an unordered list `<ul>` and uses the map method
 It might sound a bit more complex than it is, in short the list is meant to show a set of names, and it is displayed as a bullet-point list, where each name is a separate item on the list.
   
 Now, you can go ahead and try to implement the Recipe function in its entirety. What we want is something that ends up looking like this
-![Recipe Component Image](./files/recipelayout.png)
+![Recipe Component Image](./images/recipecomponent.png)
 
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
