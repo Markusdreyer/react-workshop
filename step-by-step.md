@@ -123,12 +123,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 <details>
   <summary>:wrench: Adding more components</summary>
 
-  <br>
-
-  <details>
-  <summary>:one: Adding the header</summary>
-
-  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, we want to write "`Your Name`'s Magic Cookbok". 
+  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, for example "`Your Name`'s Magic Cookbok". 
   Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
 
   For example:
@@ -161,22 +156,15 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 </details>
 
 
-  The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more and use more of the existing material-ui components. So we're going to use the `<Box>` component
+  The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more later on and use more of the existing material-ui components. So we're going to use the `<Box>` component
 
   ```ts
   <Box>This is some text</Box>
 
   ```
-  _Note: The text within the Box can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/system/typography/_
 
   As the `Box`is a material-ui component, it has access to many helpful layout options. And many of these will be helpful later on, so we can go ahead and replace the parent `<div>` element with a `<Box>` component.
-  Also, in addition to adding the `YourName's Magic Cookbook`, try setting the font size of the text within the box to 26 pixels.
-
-  ```ts
-  Hint: You can access the style properties of the box component using sx, e.g.
-
-  <Box sx={{someProperty: propertyValue}}>
-  ```
+   Also go ahead and add `YourName's Magic Cookbook`
 
 <details>
     <summary>:sparkles:Show solution:sparkles:</summary>
@@ -184,7 +172,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   ```ts
     return (
-      <Box sx={{fontSize: 26}}>
+      <Box>
         YourName's Magic Cookbook
         <Button onClick={() => getRecipe()}>Get Recipe</Button>
       </Box>
@@ -192,90 +180,14 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   ```
 </details>
   
+All right, now we've finished adding the header! Next step, we'll start having the button do something.
 
-  </details>
-
-  <details>
-  <summary>:two: Centering things</summary>
-
-  <br> So now we have some properly sized text! Next up we usually don't want everything to be stuck in the upper left corner of the screen. So lets go ahead and get things more centered. There are many ways to do this, but as we already have a parent `<Box>` element, we can go ahead and use this. 
-
-  _Note: The layout within the Box can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-box/_
-
-  So our goal is to center the text and button so they appear in the middle of the screen. 
-
-  ```ts
-  Hint: You can use the textAlign and justifyContent properties. 
-  ```
-
-
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-  ```ts
-    return (
-      <Box sx={{fontSize: 26, textAlign: "center", justifyContent: "center"}}>
-          YourName's Magic Cookbook
-          <Button variant={"contained"} onClick={() => getRecipe()}>Get Recipe</Button>
-      </Box>
-      );
-  ```
 </details>
 
-  Great, now things are centered! However, having the button and the header on the same line isn't ideal. Lets improve this by getting them on separate lines. 
 
-  We can do this by adding another `<Box>` component that wraps around the text you've written, try doing this now.
 
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-  ```ts
-    return (
-      <Box sx={{textAlign: "center", justifyContent: "center"}}>
-          <Box sx={{fontSize: 26}}>
-          YourName's Magic Cookbook
-          </Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      </Box>
-      );
-  ```
 </details>
 
-  
-  Perfect, now last thing we might notice is that things are looking a bit cramped, and also, the button doesn't reaally look like a button yet. Lets do something about this. First off, we want to add a bit of padding to both the `<Box>` components we have. To make things less cramped we can use the `padding` and `paddingBottom / paddingTop` styling properties. 
-  
-  And the `<Button>` component has the built in property `variant` try adding this to the button, it accepts a few predefined options namely `text | outlined | contained` try these out and find one that you like.
-
-<details>
-    <summary>:sparkles:Show step 2 final solution:sparkles:</summary>
-
-  ```ts
-    import { Box } from '@mui/material';
-    import Button from '@mui/material/Button';
-
-    function App() {
-
-        const getRecipe = () => {
-                console.log("Hello world")
-            }
-
-            return (
-                <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
-                    <Box sx={{fontSize: 26, paddingBottom: 2}}>
-                    YourName's Magic Cookbook
-                    </Box>
-                    <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
-                </Box>
-            );
-    }
-
-    export default App;
-  ```
-</details>
-
-  All right, now we've finished adding the header, and improving the layout a bit! Next step, we'll start having the button do something.
-  
-  </details>
 
 </details>
 
@@ -361,10 +273,8 @@ function App() {
   }
   
   return (
-      <Box sx={{textAlign: "center", justifyContent: "center", padding: 2}}>
-          <Box sx={{fontSize: 26, paddingBottom: 2}}>
+      <Box>
           YourName's Magic Cookbook
-          </Box>
           <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
       </Box>
   );
@@ -397,7 +307,9 @@ Now, in this example we have the state `counter`, and a setter for this state na
 
 So in the browser, this would show the number 0, and a button labeled Count, and each click of the button would set a new state, this state is based on the previous state and adds 1 to this. And as it is a state, React knows that it should update the render (what is shown) when the value changes. 
 
-Now, we're going to have a state which is a biit more complex, as it needs to hold a recipe which is built up of a few separate parts. But, first things first, we want to create a new component for recipe related things. First, create a folder named `components` under the `src` folder. If you're using Visual Studio Code, you can right click the `src` directory and click create new folder. Now right click the `components` folder and click create new file, lets name this new file Recipe.tsx 
+Now, we're going to have a state which is a biit more complex, as it needs to hold a recipe which is built up of a few separate parts. But, first things first, we want to create a new component for recipe related things. 
+  
+First, create a folder named `components` under the `src` folder. If you're using Visual Studio Code, you can right click the `src` directory and click create new folder and name this components. Now right click the `components` folder and click create new file, lets name this new file Recipe.tsx 
 
 Next up, we'll have a look at how the data in the recipe is structured.
 
@@ -429,7 +341,7 @@ We can see here that we're dealing with a structure such as this
 ```
 title: string,
 description: string,
-ingredients: string[]
+ingredients: string[] 
 steps: string[]
 ```
   
@@ -444,7 +356,7 @@ interface interfaceName{
 To use this interface in other components, we usually have to add an export before the interface, e.g.
   
 export interface InterfaceName {
-  .....
+  ....
 }
   
 ```
@@ -455,7 +367,6 @@ Now, go ahead and try creating an interface for the recipe, lets name it RecipeO
   <summary>:sparkles:Show solution:sparkles:</summary>
   
 ```
-  
 export interface RecipeData{
   title: string
   description: string
@@ -464,12 +375,128 @@ export interface RecipeData{
 }
 ```
   
-Next up, we'll create the actual component! 
+</details>
+  
+Next up, we'll create the actual component! Lets start with something along these lines
   
 ```
+import { Box } from "@mui/material";
+
+function Recipe(){
+    return (
+        <Box>
+          "text"
+        </Box>
+    )
+}
+```
+  
+Now, we need this Recipe component to actually receive RecipeData, it does this through the use of something called `props`. In React, `props` (short for "properties") is a way to pass data from a parent component to its child components. Props are used to customize the behavior and render of a component by providing it with external data.
+
+See the example below to see how a prop is received by a component.
+```
+function MyTitleFunction(props: {title: string){
+  <Box>
+    {props.title}
+  </Box>
+}
+
+```
+  
+This works slightly different when using an interface for the prop, as all the types and property names are already defined. So when using an interface it might look a bit like this
+
+```
+interface MyTitleInterface{
+  title: string
+}
+  
+function MyTitleFunction(props: MyTitleInterface){
+  <Box>
+    {props.title}
+  </Box>
+}
+```
+  
+So, now you can try to make use of the RecipeData interface and pass this as a prop to your Recipe component.
+  
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+```
+import { Box } from "@mui/material";
+
+export interface RecipeData{
+    title: string
+    description: string
+    ingredients: string[]
+    steps: string[]
+}
+
+function Recipe(props: RecipeData){
+    return (
+        <Box>
+            {props.title}
+        </Box>
+    )
+}
+```
+</details>
+
+Right, now we want to make use of all the properties that are passed in, this is simple for the single string properties, but requires some mapping when it comes to Lists or Arrays, e.g. when we have multiple ingredients or steps. So lets take a look at an example of how to map a list of strings.
+  
+```
+Lets say we have this list of names
+interface NamesData {
+  names: ["Hanna-Kai", "Hege", "Jack", "Markus"]
+}
+
+  
+function UnorderedNameComponent(props: names){
+  return(
+    <Box>
+        <ul>
+            {props.names.map((element, index) => (
+                <li key={index}>
+                    {element}
+                </li>
+            ))}
+        </ul>
+    </Box>
+  )
+}
   
 ```
 
-</details>
+So there's a few things happening here. The `<ul>` element in HTML stands for "Unordered List". It is used to create a list of items, where the order of the items does not matter. The items in an unordered list are usually represented by bullet points.
+
+The `<ul>` element is used in conjunction with the `<li>` element, which stands for "List Item". Each item in the list is contained within an `<li>` element, and multiple `<li>` elements are grouped within the `<ul>` element.
   
+The code in the example creates an unordered list `<ul>` and uses the map method to render a list of items based on an array of names passed as a prop to the component. The map method is used to iterate over the array and render a `<li>` for each element, with the text content being the element and the key being the index of the element in the array.
+  
+It might sound a bit more complex than it is, in short the list is meant to show a set of names, and it is displayed as a bullet-point list, where each name is a separate item on the list.
+  
+Now, you can go ahead and try to implement the Recipe function in its entirety. What we want is something that ends up looking like this
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+```
+import { Box } from "@mui/material";
+
+export interface RecipeData{
+    title: string
+    description: string
+    ingredients: string[]
+    steps: string[]
+}
+
+function Recipe(props: RecipeData){
+    return (
+        <Box>
+            {props.title}
+        </Box>
+    )
+}
+```
+</details>
+
 </details>
