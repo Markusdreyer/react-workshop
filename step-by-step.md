@@ -11,7 +11,7 @@ This is a step by step guide to implementing the solution, where each step is it
 <details>
   <summary>:pushpin:Windows</summary>
 
-  First open up the file explorer and navigate to where you want to store the project. On the top of the file explorer, you'll see a path such as `C:/Users/Username/Documents` Click this with your mouse and copy the text.
+  Open up the file explorer and navigate to where you want to store the project. On the top of the file explorer, you'll see a path such as `C:/Users/Username/Documents` Click this with your mouse and copy the text.
 
   Now, open up a command line window, you can do this by pressing the start button, write in `cmd` and press enter when the search is finished.
 
@@ -23,13 +23,13 @@ This is a step by step guide to implementing the solution, where each step is it
   <summary>:pushpin:MacOS</summary>
 
 
-First, open up a terminal, you can do this by using Spotlight, which is the magnifying glass on the top right corner of your screen, write in `terminal` and press enter when the search is finished.
+First, open up a terminal, you can do this by using Spotlight, which is the magnifying glass in the top right corner of your screen, write in `terminal` and press enter when the search is finished.
 
   When the terminal is open, navigate to a suitable place to clone the repo, such as in the `Documents` folder: `cd ~/Documents`
 
 </details>
 
-Now we want to clone the project using git. This can be done using the `git clone` command with a url to the git repository. In github this can be found by pressing the green `Code` button on the repository page, and it should show the link in the popup box. We'll include it in the command here you simplify things.
+Now we want to clone the project using git. This can be done using the `git clone` command with a URL to the git repository. In GitHub this can be found by pressing the green `Code` button on the repository page, and it should show the link in the popup box. We'll include it in the command here you simplify things.
 
 Use the following command 
 
@@ -44,17 +44,18 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   <summary>:runner: Running the Project</summary><br>
 
 
-  First off, we want to start up the project, this allows us to immediately see changes and updates in the web browser as we write out code.
+  First off, we want to start up the project. This allows us to immediately see changes and updates in the web browser as we write our code.
 
-  Now we should still have the terminal or command line window open. So, we need to navigate into the project folder. This can be done by writing
+  We should still have the terminal or command line window open. Navigate into the project folder by running the following command:
 
   ```
   cd react-workshop
   ```
 
-  Now the first command you want to run is `npm install` this will install all dependencies for the project, when it is finished, you can write in `npm start`, this will start the project, and open up the web browser.
+  The first command you want to run is `npm install`. This will install all dependencies for the project. When it is finished, you can run the `npm start`-command, which will start the project and open up a web browser.
 
-  Now with the web-app running, it will update as soon as you save file after having written new code, this is done by pressing `CTRL-S` for windows pcs or `Command-S` for macs.
+
+  When the app is running, it will detect updates in the code when files are saved and update the web page immediately. 
 
 </details>
 
@@ -64,9 +65,9 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   <summary>:wrench: Getting started</summary><br>
 
 
-  In this project we'll be using a component library named Material-UI, it provides us with ready made components, such as buttons, text fields and much much more. There are many such libaries available, and there's usually no need to re-invent the wheel and create buttons and other components entirely from scratch. So, with that out of the way, we'll move onto the first step.
+  In this project we'll be using a component library named [Material-UI](https://mui.com/). It provides us with ready-made components, such as buttons, text fields and much more. There are many such libraries available, and there's usually no need to re-invent the wheel and create buttons and other components entirely from scratch. 
 
-  The first step is going to be to just add a simple button with the label "Get Recipe". This needs to be placed within the `return` statement in the `App.tsx`-file. A button can be added using the following.
+  The first step will be to add a simple button with the label "Get Recipe". This needs to be placed within the `return` statement in the `App.tsx`-file. A button can be added using the following.
 
 
   ```js
@@ -74,20 +75,20 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   ```
   
 
-  The next step is to add an empty function. A function is coded like this, but unlike the Button, it should be placed outside the return statement. Lets name the function getRecipe so it is clear what it is supposed to do.
+  The next step is to add a function that is called whenever the button is clicked. 
+  
+  A function is coded like this, but unlike the Button, it should be placed above the return statement. Let's give our function a descriptive name like `getRecipe`:
 
 
   ```ts
-  const myFunction = () => {
+  const getRecipe = () => {
       console.log("Hello world");
     }
   ```
 
-  Now, we want to combine the two, and make the button call/use the function when it is clicked. And this button component has an onClick parameter, see if you can find out how to use this.
+  Now, we want to combine the two and make the button call the function when it's clicked. The button component has an onClick parameter, see if you can find out how to use this.
 
   _Note: The button can be stylized in many ways. Take a look at the documentation here for an overview: https://mui.com/material-ui/react-button/_
-
-
 
   <details>
     <summary>:sparkles:Show solution:sparkles:</summary>
