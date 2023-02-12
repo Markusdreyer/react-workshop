@@ -22,62 +22,63 @@ app.listen(port, () => {
 });
 
 app.post("/recipes", async (req: Request, res: Response) => {
-  console.info("Received recipe request with request body: ", req.body)
+  console.info("Received recipe request with request body: ", req.body);
   const ingredients: [string] = req.body.ingredients;
-  if(!ingredients || ingredients.length < 1) {
-    const error = { message: "No ingredients provided, aborting OpenAI request"}
-    console.error(error.message)
-    res.status(400).send(error)
-    return
+  if (!ingredients || ingredients.length < 1) {
+    const error = {
+      message: "No ingredients provided, aborting OpenAI request",
+    };
+    console.error(error.message);
+    res.status(400).send(error);
+    return;
   }
   console.log("New recipe request! Ingredients: ", ingredients);
-  
-  try{
+
+  try {
     const response = await openAIRequest(ingredients);
 
     if (!response) return res.send("No response from OpenAI");
     if (!response.data) return res.send("No data from OpenAI");
     if (response.data.choices.length < 1) return res.send("No recipe found");
-  
+
     const recipe = response.data.choices[0].text;
-  
+
     try {
       JSON.parse(recipe);
     } catch (e) {
       res.send("No recipe found");
     }
     res.send(recipe);
+  } catch (error) {
+    res.send("OpenAI servers are busy, please try again");
   }
-  catch(error) {
-    res.send("OpenAI servers are busy, please try again")
-  };
-})
+});
 
 app.post("/image", async (req: Request, res: Response) => {
-  console.info("Received image request with request body: ", req.body)
-  const dish: IDish = req.body
+  console.info("Received image request with request body: ", req.body);
+  const dish: IDish = req.body;
 
-  if(!dish) {
-    const error = { message: "No ingredients provided, aborting Dall-E request"}
-    console.error(error.message)
-    res.status(400).send(error)
-    return
+  if (!dish) {
+    const error = {
+      message: "No ingredients provided, aborting Dall-E request",
+    };
+    console.error(error.message);
+    res.status(400).send(error);
+    return;
   }
 
   try {
-    const response = await dalleRequest(dish.title, dish.description)
+    const response = await dalleRequest(dish.title, dish.description);
 
     if (!response) return res.send("No response from OpenAI");
     if (!response.data) return res.send("No data from OpenAI");
-  
-    const imageUrl = response.data.data[0].url;
-    res.send(imageUrl)
-  } catch(error) {
-    res.send("OpenAI servers are busy, please try again")
-  }
-  
-})
 
+    const imageUrl = response.data.data[0].url;
+    res.send(imageUrl);
+  } catch (error) {
+    res.send("OpenAI servers are busy, please try again");
+  }
+});
 
 const openAIRequest = (ingredients: Array<string>) => {
   const format = `
@@ -110,9 +111,9 @@ const dalleRequest = (title: string, description: string) => {
     n: 1,
     size: "1024x1024",
   });
-}
+};
 
 interface IDish {
-  title: string,
-  description: string
+  title: string;
+  description: string;
 }
