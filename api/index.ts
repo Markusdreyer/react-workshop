@@ -32,16 +32,8 @@ app.post("/recipes", async (req: Request, res: Response) => {
   }
   console.log("New recipe request! Ingredients: ", ingredients);
   
-  const format = `
-    {
-      "title": String,
-      "description" String,
-      "ingredients": []String,
-      "steps": []String,
-    }
-  `;
   try{
-    const response = await openAIRequest(ingredients, format);
+    const response = await openAIRequest(ingredients);
 
     if (!response) return res.send("No response from OpenAI");
     if (!response.data) return res.send("No data from OpenAI");
@@ -61,7 +53,16 @@ app.post("/recipes", async (req: Request, res: Response) => {
   };
 })
 
-const openAIRequest = (ingredients: Array<string>, format: string) => {
+const openAIRequest = (ingredients: Array<string>) => {
+  const format = `
+    {
+      "title": String,
+      "description" String,
+      "ingredients": []String,
+      "steps": []String,
+    }
+  `;
+
   return openai.createCompletion({
     model: "text-davinci-003",
     prompt:
