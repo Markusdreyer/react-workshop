@@ -53,6 +53,32 @@ app.post("/recipes", async (req: Request, res: Response) => {
   };
 })
 
+app.post("/image", async (req: Request, res: Response) => {
+  console.info("Received image request with request body: ", req.body)
+  const dish: IDish = req.body
+
+  if(!dish) {
+    const error = { message: "No ingredients provided, aborting Dall-E request"}
+    console.error(error.message)
+    res.status(400).send(error)
+    return
+  }
+
+  try {
+    const response = await dalleRequest(dish.title, dish.description)
+
+    if (!response) return res.send("No response from OpenAI");
+    if (!response.data) return res.send("No data from OpenAI");
+  
+    const imageUrl = response.data.data[0].url;
+    res.send(imageUrl)
+  } catch(error) {
+    res.send("OpenAI servers are busy, please try again")
+  }
+  
+})
+
+
 const openAIRequest = (ingredients: Array<string>) => {
   const format = `
     {
@@ -77,3 +103,16 @@ const openAIRequest = (ingredients: Array<string>) => {
     presence_penalty: 0,
   });
 };
+
+const dalleRequest = (title: string, description: string) => {
+  return openai.createImage({
+    prompt: `Create a hyperrealistic 4K image in the style of a menu image at a fancy restaurant of the following dish: ${title}, ${description}"`,
+    n: 1,
+    size: "1024x1024",
+  });
+}
+
+interface IDish {
+  title: string,
+  description: string
+}
