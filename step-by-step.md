@@ -146,7 +146,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
     <summary>:sparkles:Show solution:sparkles:</summary>
 
 
-  ```ts
+  ```tsx
     return (
         <div>
           <Button onClick={() => getRecipe()}>Get Recipe</Button>
