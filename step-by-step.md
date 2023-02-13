@@ -219,7 +219,7 @@ fetch("http://example.com/api", {
 ```
 
 ### Encapsulating the fetch request
-Let's encapsulate this request into a function we can reuse:
+Let's encapsulate this request into the `getRecipe` function we already made:
 
 ```ts
 //The async keyword allows us to to use "await" to perform asynchronous operations, such as communicating with the backend
