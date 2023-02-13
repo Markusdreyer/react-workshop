@@ -1,5 +1,5 @@
 # Step by step guide
-This is a step by step guide to implementing the solution, where each step is iteratively added for each pull request. 
+This is a step by step guide to implementing the solution.
 
 ## Using GIT to clone the project
 <details>
