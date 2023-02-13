@@ -69,7 +69,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   The first step is going to be to just add a simple button with the label "Get Recipe". This needs to be placed within the `return` statement in the `App.tsx`-file. A button can be added using the following.
 
 
-  ```js
+  ```tsx
   <Button>MyLabel</Button>
   ```
   
@@ -77,7 +77,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   The next step is to add an empty function. A function is coded like this, but unlike the Button, it should be placed outside the return statement. Lets name the function getRecipe so it is clear what it is supposed to do.
 
 
-  ```ts
+  ```tsx
   const myFunction = () => {
       console.log("Hello world");
     }
@@ -92,7 +92,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   <details>
     <summary>:sparkles:Show solution:sparkles:</summary>
 
-  ```ts
+  ```tsx
     import Button from '@mui/material/Button';
 
     function App() {
@@ -128,7 +128,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   For example:
 
-  ```ts
+  ```tsx
   return (
           <>
             <p> I am a child '<>' </p>
@@ -158,7 +158,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more later on and use more of the existing material-ui components. So we're going to use the `<Box>` component
 
-  ```ts
+  ```tsx
   <Box>This is some text</Box>
 
   ```
@@ -169,7 +169,7 @@ Now lets combine this, add the `<Box>` element with the text `YourName's Magic C
     <summary>:sparkles:Show solution:sparkles:</summary>
 
 
-  ```ts
+  ```tsx
     return (
       <>
         YourName's Magic Cookbook
@@ -198,7 +198,7 @@ Let's get our React-app underway by implementing fetching logic in our app. Java
 
 A basic fetch request is really simple to set up. Have a look at the following code:
 
-```ts
+```tsx
 fetch('http://example.com/api')
   .then((response) => response.json())
   .then((data) => console.log(data));
@@ -208,7 +208,7 @@ Here we are performing a request to an API at 'http://example.com/api' and print
 
 This request is nice, but it is lacking one key feature: the request body. Also, this request is a simple GET request, when performing HTTP requests with a request body, a POST request is used, so we need to change that as well. Here is an example:
 
-```ts
+```tsx
 fetch("http://example.com/api", {
       method: "POST",
       body: requestBody,
@@ -220,7 +220,7 @@ fetch("http://example.com/api", {
 ### Encapsulating the fetch request
 Let's encapsulate this request into the `getRecipe` function we already made:
 
-```ts
+```tsx
 //The async keyword allows us to to use "await" to perform asynchronous operations, such as communicating with the backend
 const getRecipe = async () => {
     //Hardcoded list of ingredients. We'll come back to this later, but we need some data to work with for now.
@@ -252,7 +252,7 @@ Now try adding this in your App.tsx file, and check the console output after try
   <summary>:sparkles:Show solution:sparkles:</summary>
   
   
-```ts
+```tsx
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 
@@ -294,7 +294,7 @@ First, create a folder named `components` under the `src` folder. If you're usin
 
 Next up, we'll have a look at how the data in the recipe is structured.
 
-```ts
+```tsx
 {
     "title": "Caprese Pasta",
     "description": "A delicious and simple pasta dish featuring the classic Italian flavors of tomato, mozzarella, and basil.",
@@ -319,7 +319,7 @@ Next up, we'll have a look at how the data in the recipe is structured.
 
 We can see here that we're dealing with a structure such as this
   
-```ts
+```tsx
 title: string,
 description: string,
 ingredients: string[] 
@@ -328,7 +328,7 @@ steps: string[]
   
 So to be able to use a state for multiple fields, we usually have to use a state object structure. Now, we're going to use this object structure in multiple components, in both our App.tsx and our Recipe.tsx components. When we need to use it in several places, or it is a larger object structure it is often helpful to create an interface that defines the structure. See an example of an interface below.
   
-```ts
+```tsx
 interface interfaceName{
   propertyName1: propertyType1
   propertyName2: propertyType2
@@ -347,7 +347,7 @@ Now, go ahead and try creating an interface for the recipe, lets name it RecipeD
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```ts
+```tsx
 export interface RecipeData{
   title: string
   description: string
@@ -360,7 +360,7 @@ export interface RecipeData{
   
 Next up, we'll create the actual component! Lets start with something along these lines
   
-```ts
+```tsx
 import { Box } from "@mui/material";
 
 function Recipe(){
@@ -376,7 +376,7 @@ Now, we need this Recipe component to actually receive RecipeData, it does this 
 
 See the example below to see how a prop is received by a component.
   
-```ts
+```tsx
 function MyTitleFunction(props: {title: string){
   <Box>
     {props.title}
@@ -387,7 +387,7 @@ function MyTitleFunction(props: {title: string){
   
 This works slightly different when using an interface for the prop, as all the types and property names are already defined. So when using an interface it might look a bit like this
 
-```ts
+```tsx
 interface MyTitleInterface{
   title: string
 }
@@ -404,7 +404,7 @@ So, now you can try to make use of the RecipeData interface and pass this as a p
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```ts
+```tsx
 import { Box } from "@mui/material";
 
 export interface RecipeData{
@@ -426,7 +426,7 @@ function Recipe(props: RecipeData){
 
 Right, now we want to make use of all the properties that are passed in, this is simple for the single string properties, but requires some mapping when it comes to Lists or Arrays, e.g. when we have multiple ingredients or steps. So lets take a look at an example of how to map a list of strings.
   
-```ts
+```tsx
 Lets say we have this list of names
   
 const names: [NameData] = [{firstName: "Jack", lastName: "Syvertsen"}]
@@ -467,7 +467,7 @@ Now, you can go ahead and try to implement the Recipe function in its entirety. 
   
 To test your solution you can use this example data
   
-```ts
+```tsx
 const ExampleRecipeData = {
     
   title: "Caprese Pasta",
@@ -496,7 +496,7 @@ const ExampleRecipeData = {
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```ts
+```tsx
 import { Box } from "@mui/material";
 
 export interface RecipeData{
@@ -550,7 +550,7 @@ export default Recipe;
   
 <br> In React, "state" is a way to store and manage component-level data that affects the behavior and render of a component. It is an object that holds data that can change over time, and it is an essential part of building dynamic and interactive user interfaces. It might sound a bit complicated, but it's actually not that hard to use. So lets get going with an example
   
-```ts
+```tsx
 function Counter() {
   const [counter, setCounter] = useState(0);
   
@@ -569,7 +569,7 @@ So in the browser, this would show the number 0, and a button labeled Count, and
 
 What we want in our application is to have a recipe state. Lets see an example of how this can look
 
-```ts
+```tsx
 import { useState } from 'react';
 import { RecipeData } from './components/Recipe'
   
@@ -585,7 +585,7 @@ Next up we want to actually set the recipe state when we get some data back from
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```ts
+```tsx
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import { RecipeData } from './components/Recipe';
@@ -621,7 +621,7 @@ export default App;
   
 So, next we want to use the actual recipe data! Lets use our Recipe component and pass the needed props to it. The component can be used like this
   
-```ts
+```tsx
   <Recipe title={recipe.title} description={recipe.description}....../>
   
   Notice that we are writing this as <Recipe ... /> instead of <Recipe ...></Recipe>
@@ -633,7 +633,7 @@ Now try implementing this yourself!
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```ts
+```tsx
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Recipe, { RecipeData } from './components/Recipe';
@@ -670,7 +670,7 @@ export default App;
   
 Now you might notice nothing is showing up in the browser anymore, this is due to the Recipe receiving null values, as the title, description and so on haven't been initialized. We'll sort this out by using something called conditional rendering, which is basically an `if` statement.
   
-```ts
+```tsx
   {recipe.title && <Recipe ......./>}
   
   In essence this means 
