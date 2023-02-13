@@ -1,29 +1,28 @@
 # React workshop
 
-## Mappestruktur
+## How to run the app
+The project is divided into two parts, backend and frontend. The backend is located in the `backend` folder, while the frontend is located in the root folder.
 
-Prosjektet er delt opp i to deler, backend og frontend. Backend ligger i `backend`-mappen, mens frontend ligger i rotmappen.
-
-## Starte opp frontend
-For å starte opp frontend, må du først kjøre følgende kommando fra terminalen for å installere nødvendige avhengigheter:
+## Starting up the frontend
+To start up the frontend, first run the following command from the terminal to install the necessary dependencies:
 
 ```
 npm install
 ```
 
-Deretter, fra samme terminal kan du starte opp frontend med følgende kommando:
+Then, from the same terminal you can start up the frontend with the following command:
 ```
 npm start
 ```
 
-## Starte opp backend
-For å starte opp backend, må du først navigere inn til `backend`-mappen, feks med `cd backend`. Når du er inne i `backend`-mappen må du først kjøre følgende kommando fra terminalen for å installere nødvendige avhengigheter:
+## Starting up the backend
+To start up the backend, first navigate to the `backend` folder, e.g. with `cd backend`. Once you are inside the `backend` folder, first run the following command from the terminal to install the necessary dependencies:
 
 ```
 npm install
 ```
 
-Deretter, fra samme terminal kan du starte opp frontend med følgende kommando:
+Then, from the same terminal you can start up the frontend with the following command:
 ```
 npm start
 ```
