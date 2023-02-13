@@ -666,7 +666,7 @@ export default App;
   
 </details>
   
-Now you might notice nothing is showing up in the browser anymore, this is due to the Recipe receiving null values, as the title, description and so on haven't been initialized. We'll sort this out using something called conditional rendering, basically an `if` statement.
+Now you might notice nothing is showing up in the browser anymore, this is due to the Recipe receiving null values, as the title, description and so on haven't been initialized. We'll sort this out by using something called conditional rendering, which is basically an `if` statement.
   
 ```ts
   {recipe.title && <Recipe ......./>}
