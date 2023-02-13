@@ -437,29 +437,23 @@ interface NameData {
 }
 
   
-function UnorderedNameComponent(props: names){
+function NameList(props: names){
   return(
     <Box>
-        <ul>
-            {props.names.map((element, index) => (
-                <li key={index}>
-                    {element}
-                </li>
+        <List>
+            {props.names.map((name) => (
+                <ListItem>{name.firstName} {name.lastName}</ListItem>
             ))}
-        </ul>
+        </List>
     </Box>
   )
 }
   
 ```
-
-So there's a few things happening here. The `<ul>` element in HTML stands for "Unordered List". It is used to create a list of items, where the order of the items does not matter. The items in an unordered list are usually represented by bullet points.
-
-The `<ul>` element is used in conjunction with the `<li>` element, which stands for "List Item". Each item in the list is contained within an `<li>` element, and multiple `<li>` elements are grouped within the `<ul>` element.
   
-The code in the example creates an unordered list `<ul>` and uses the map method to render a list of items based on an array of names passed as a prop to the component. The map method is used to iterate over the array and render a `<li>` for each element, with the text content being the element and the key being the index of the element in the array.
+The code in the example creates a list and uses the map method to render a list of items based on an array of names passed as a prop to the component. The map method is used to iterate over the array and render a `<ListItem>` for each element, with the text content being the element and the key being the index of the element in the array.
   
-It might sound a bit more complex than it is, in short the list is meant to show a set of names, and it is displayed as a bullet-point list, where each name is a separate item on the list.
+It might sound a bit more complex than it is, in short the list is meant to show a set of names, and it is displayed as a list, where each name is a separate item on the list.
   
 Now, you can go ahead and try to implement the Recipe function in its entirety. What we want is something that ends up looking like this
   
@@ -508,32 +502,20 @@ export interface RecipeData{
 
 function Recipe(props: RecipeData){
     return (
-        <Box>
-            <Box>
-                {props.title}
-            </Box>
-            <Box>
-                {props.description}
-            </Box>
-            <Box>
-                <ul>
-                    {props.ingredients.map((element, index) => (
-                        <li key={index}>
-                            {element}
-                        </li>
-                    ))}
-                </ul>
-            </Box>
-            <Box>
-                <ul>
-                    {props.steps.map((element, index) => (
-                        <li key={index}>
-                            {element}
-                        </li>
-                    ))}
-                </ul>
-            </Box>
-        </Box>
+      <>
+        <Box>{props.title}</Box>
+        <Box>{props.description}</Box>
+        <List>
+            {props.ingredients.map((ingredient) => (
+                <ListItem>{ingredient}</ListItem>
+            ))}
+        </List>
+        <List>
+            {props.steps.map((step) => (
+                <ListItem>{step}</ListItem>
+            ))}
+        </List>
+      </>
     )
 }
   
