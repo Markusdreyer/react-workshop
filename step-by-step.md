@@ -1,5 +1,5 @@
 # Step by step guide
-This is a step by step guide to implementing the solution.
+This is a step-by-step guide to implementing the solution.
 
 ## Using GIT to clone the project
 <details>
