@@ -761,7 +761,7 @@ function App(){
 Now this will show an autocomplete component with two options, tomato and mozarella, however we want to be able to choose a lot more ingredients. 
 We could add all the ingredients we want in `options` directly, but this could end up as a huuuge list. Luckily, we've included a file `Ingredients.json` which contains a large list of ingredients, so lets import this list and use it for the options instead. 
       
-```
+```tsx
 import IngredientOptions from '../Files/Ingredients.json'
 
 function App(){
@@ -780,7 +780,7 @@ Try doing this now.
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```ts
+```tsx
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Recipe, { RecipeData } from './components/Recipe';
@@ -838,7 +838,7 @@ export default App;
   
 Perfect! We now have our list of ingredients, but we're still not really using it to create our recipe, we now need to update our getRecipe function to use the selected ingredients. This is pretty straightforward, so lets have a look at an example below
   
-```
+```tsx
 const [ingredients, setIngredients] = useState([] as string[])
   
   const getRecipe = async () => {
