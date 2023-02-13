@@ -55,6 +55,12 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   Now the first command you want to run is `npm install` this will install all dependencies for the project, when it is finished, you can write in `npm start`, this will start the project, and open up the web browser.
 
   Now with the web-app running, it will update as soon as you save file after having written new code, this is done by pressing `CTRL-S` for windows pcs or `Command-S` for macs.
+  
+Now while we're at it, we might as well go ahead and start up the backend. 
+
+Do the same as you did for the front-end, open up a terminal and navigate to the same folder as the front-end, then also add in `cd server` and run `n
+pm install`
+and `npm start
 
 </details>
 
