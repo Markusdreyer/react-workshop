@@ -130,10 +130,10 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   ```ts
   return (
-          <div>
-            <p> I am a child of div</p>
-            <p> I am another child of div</p>
-          </div>
+          <>
+            <p> I am a child '<>' </p>
+            <p> I am another child of '<>'</p>
+          </>
         );
 
   ```
@@ -148,9 +148,9 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   ```tsx
     return (
-        <div>
+        <>
           <Button onClick={() => getRecipe()}>Get Recipe</Button>
-        </div>
+        </>
       );
   ```
 </details>
@@ -163,8 +163,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   ```
 
-  As the `Box`is a material-ui component, it has access to many helpful layout options. And many of these will be helpful later on, so we can go ahead and replace the parent `<div>` element with a `<Box>` component.
-   Also go ahead and add `YourName's Magic Cookbook`
+Now lets combine this, add the `<Box>` element with the text `YourName's Magic Cookbook` and wrap the `<Box>` and the `<Button>` elements in a parent element
 
 <details>
     <summary>:sparkles:Show solution:sparkles:</summary>
@@ -172,10 +171,10 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
   ```ts
     return (
-      <Box>
+      <>
         YourName's Magic Cookbook
         <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      </Box>
+      </>
       );
   ```
 </details>
@@ -273,10 +272,10 @@ function App() {
   }
   
   return (
-      <Box>
-          YourName's Magic Cookbook
+      <>
+          <Box>YourName's Magic Cookbook</Box>
           <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      </Box>
+      </>
   );
 }
 export default App;
@@ -556,10 +555,10 @@ function Counter() {
   const [counter, setCounter] = useState(0);
   
   return (
-    <Box>
+    <>
       {counter}
       <Button onClick={setCounter(counter + 1)}>Count</Button>
-    </Box>
+    </>
   )
 }
 ```
@@ -609,10 +608,10 @@ function App() {
   }
   
   return (
-      <Box>
-          YourName's Magic Cookbook
+      <>
+          <Box>YourName's Magic Cookbook</Box>
           <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      </Box>
+      </>
   );
 }
 export default App;
@@ -657,11 +656,11 @@ function App() {
   }
   
   return (
-      <Box>
-          YourName's Magic Cookbook
+      <>
+          <Box>YourName's Magic Cookbook</Box>
           <Button onClick={() => getRecipe()}>Get Recipe</Button>
           <Recipe title={recipe.title} description={recipe.description} ingredients={recipe.ingredients} steps={recipe.steps}/>
-      </Box>
+      </>
   );
 }
 export default App;
@@ -707,8 +706,8 @@ function App() {
   }
   
   return (
-      <Box>
-          YourName's Magic Cookbook
+      <>
+          <Box>YourName's Magic Cookbook</Box>
           <Button onClick={() => getRecipe()}>Get Recipe</Button>
           {recipe.title && 
             <Recipe 
@@ -718,7 +717,7 @@ function App() {
               steps={recipe.steps}
             />
           }
-      </Box>
+      </>
   );
 }
 export default App;
