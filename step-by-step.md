@@ -58,8 +58,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   
 Now while we're at it, we might as well go ahead and start up the backend. 
 
-Do the same as you did for the front-end, open up a terminal and navigate to the same folder as the front-end, then also add in `cd server` and run `n
-pm install`
+Do the same as you did for the front-end, open up a terminal and navigate to the same folder as the front-end, then also add in `cd server` and run `npm install`
 and `npm start
 
 </details>
