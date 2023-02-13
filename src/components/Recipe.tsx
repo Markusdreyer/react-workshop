@@ -9,32 +9,18 @@ export interface RecipeData{
 
 function Recipe(props: RecipeData){
     return (
-        <Box>
-            <Box>
-                {props.title}
-            </Box>
-            <Box>
-                {props.description}
-            </Box>
-            <Box>
-                <ul>
-                    {props.ingredients.map((element, index) => (
-                        <li key={index}>
-                            {element}
-                        </li>
-                    ))}
-                </ul>
-            </Box>
-            <Box>
-                <ul>
-                    {props.steps.map((element, index) => (
-                        <li key={index}>
-                            {element}
-                        </li>
-                    ))}
-                </ul>
-            </Box>
-        </Box>
+            <Box>{props.title}</Box>
+            <Box>{props.description}</Box>
+            <List>
+                {props.ingredients.map((ingredient) => (
+                    <ListItem>{ingredient}</ListItem>
+                ))}
+            </List>
+            <List>
+                {props.steps.map((step) => (
+                    <ListItem>{step}</ListItem>
+                ))}
+            </List>
     )
 }
   
