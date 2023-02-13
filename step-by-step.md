@@ -546,7 +546,7 @@ export default Recipe;
   
 ## Step 5 - State management
 <details>
-  <summary>:wrench: Presenting the results </summary>
+  <summary>:wrench: Managing the state</summary>
   
 <br> In React, "state" is a way to store and manage component-level data that affects the behavior and render of a component. It is an object that holds data that can change over time, and it is an essential part of building dynamic and interactive user interfaces. It might sound a bit complicated, but it's actually not that hard to use. So lets get going with an example
   
