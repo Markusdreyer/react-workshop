@@ -31,7 +31,7 @@ First, open up a terminal, you can do this by using Spotlight, which is the magn
 
 Now we want to clone the project using git. This can be done using the `git clone` command with a url to the git repository. In github this can be found by pressing the green `Code` button on the repository page, and it should show the link in the popup box. We'll include it in the command here you simplify things.
 
-Use the following command 
+Use the following command -
 
 ```
 git clone https://github.com/Markusdreyer/react-workshop.git
@@ -59,7 +59,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 Now while we're at it, we might as well go ahead and start up the backend. 
 
 Do the same as you did for the front-end, open up a terminal and navigate to the same folder as the front-end, then also add in `cd api` and run `npm install`
-and `npm start
+and `npm start`
 
 </details>
 
