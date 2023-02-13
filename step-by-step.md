@@ -195,7 +195,7 @@ All right, now we've finished adding the header! Next step, we'll start having t
 <details>
   <summary>:wrench: How to query </summary>
   
-  Now let's get our React-app underway by implementing fetching logic in our app. JavaScript has a "Fetch" API that [provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.](!https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+Let's get our React-app underway by implementing fetching logic in our app. JavaScript has a "Fetch" API that provides a global fetch() method that provides an easy, logical way to fetch resources across the network.
 
 A basic fetch request is really simple to set up. Have a look at the following code:
 
