@@ -683,7 +683,7 @@ Now you might notice nothing is showing up in the browser anymore, this is due t
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
   
-```ts
+```tsx
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Recipe, { RecipeData } from './components/Recipe';
@@ -737,21 +737,116 @@ Perfect, now you've learned a little bit about state management as well! Next up
 <br> So now we're finally going to add some more interactivity by using an autocomplete component! 
 We won't go into details regarding the Autocomplete component, and will focus only on what we need to use. You can see an example of how it can be used below
 
-```ts
-<Autocomplete 
-  multiple // Allows you to select multiple items
-  filterSelectedOptions // Filters out selected items
-  disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
-  options={["tomato", "mozarella"]} // The options shown in the dropdown menu
-  onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
-    setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
-  }}
-  renderInput={(params) => (
-    <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
+```tsx
+  
+function App(){
+  const [ingredients, setIngredients] = useState([] as string[])
+  
+  return(  
+    <Autocomplete 
+      multiple // Allows you to select multiple items
+      filterSelectedOptions // Filters out selected items
+      disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
+      options={["tomato", "mozarella"]} // The options shown in the dropdown menu
+      onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
+        setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
+      }}
+      renderInput={(params) => (
+        <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
+      )
+    }/>
   )
-}/>
 ```
 
+Now this will show an autocomplete component with two options, tomato and mozarella, however we want to be able to choose a lot more ingredients. 
+We could add all the ingredients we want in `options` directly, but this could end up as a huuuge list. Luckily, we've included a file `Ingredients.json` which contains a large list of ingredients, so lets import this list and use it for the options instead. 
+      
+```
+import IngredientOptions from '../Files/Ingredients.json'
+
+function App(){
+  const [ingredients, setIngredients] = useState([] as string[])
   
+  return(  
+    <Autocomplete 
+      ....
+      options={IngredientOptions}
+      ....
+    />
+```
+  
+Try doing this now.
+      
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+```ts
+import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
+import Recipe, { RecipeData } from './components/Recipe';
+import { useState } from 'react';
+import IngredientOptions from '../Files/Ingredients.json'
+
+function App() {
+  const [recipe, setRecipe] = useState({} as RecipeData)
+  const [ingredients, setIngredients] = useState([] as string[])
+  
+  const getRecipe = async () => {
+    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+    await fetch("http://localhost:8000/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => setRecipe(data));
+  }
+  
+  return (
+      <>
+          <Box>YourName's Magic Cookbook</Box>
+          <Autocomplete 
+            multiple // Allows you to select multiple items
+            filterSelectedOptions // Filters out selected items
+            disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
+            options={IngredientOptions} // The options shown in the dropdown menu
+            onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
+              setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
+            }}
+            renderInput={(params) => (
+              <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
+            )
+          }/>
+          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          {recipe.title && 
+            <Recipe 
+              title={recipe.title} 
+              description={recipe.description} 
+              ingredients={recipe.ingredients} 
+              steps={recipe.steps}
+            />
+          }
+      </>
+  );
+}
+export default App;
+
+```
+</details>
+  
+Perfect! We now have our list of ingredients, but we're still not really using it to create our recipe, we now need to update our getRecipe function to use the selected ingredients. This is pretty straightforward, so lets have a look at an example below
+  
+```
+const [ingredients, setIngredients] = useState([] as string[])
+  
+  const getRecipe = async () => {
+    const requestBody = JSON.stringify({ingredients: ingredients})
+    .....
+  }
+```
+  
+Perfect! Now we have all our functionality, next you can choose a couple of different tasks, either improving the layout and design to make things look nicer, or implementing more functionality in the backend and frontend to also make use of an image generator, to create a fitting image to the recipe.
   
 </details>
