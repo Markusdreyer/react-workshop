@@ -430,8 +430,11 @@ Right, now we want to make use of all the properties that are passed in, this is
 ```ts
 Lets say we have this list of names
   
-interface NamesData {
-  names: ["Hanna-Kai", "Hege", "Jack", "Markus"]
+const names: [NameData] = [{firstName: "Jack", lastName: "Syvertsen"}]
+
+interface NameData {
+  firstName: string,
+  lastName: string
 }
 
   
