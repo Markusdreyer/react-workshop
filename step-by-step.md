@@ -342,7 +342,7 @@ export interface InterfaceName {
   
 ```
 
-Now, go ahead and try creating an interface for the recipe, lets name it RecipeObject
+Now, go ahead and try creating an interface for the recipe, lets name it RecipeData
   
 <details>
   <summary>:sparkles:Show solution:sparkles:</summary>
