@@ -102,12 +102,12 @@ and `npm start`
 
     function App() {
 
-        const getRecipe = () => {
+        function getRecipe() {
                 console.log("Hello world")
             }
 
         return (
-            <Button onClick={() => getRecipe()}>Get Recipe</Button>
+            <Button onClick={getRecipe()}>Get Recipe</Button>
         );
     }
 
@@ -227,7 +227,7 @@ Let's encapsulate this request into the `getRecipe` function we already made:
 
 ```tsx
 //The async keyword allows us to to use "await" to perform asynchronous operations, such as communicating with the backend
-const getRecipe = async () => {
+async function getRecipe() {
     //Hardcoded list of ingredients. We'll come back to this later, but we need some data to work with for now.
     const requestBody = JSON.stringify({
         ingredients: [
@@ -263,8 +263,16 @@ import Button from '@mui/material/Button';
 
 function App() {
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() => {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -583,8 +591,16 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -599,7 +615,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe()}>Get Recipe</Button>
       </>
   );
 }
@@ -632,8 +648,16 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -648,7 +672,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe()}>Get Recipe</Button>
           <Recipe title={recipe.title} description={recipe.description} ingredients={recipe.ingredients} steps={recipe.steps}/>
       </>
   );
@@ -682,8 +706,16 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -698,7 +730,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe()}>Get Recipe</Button>
           {recipe.title && 
             <Recipe 
               title={recipe.title} 
@@ -781,8 +813,16 @@ function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   const [ingredients, setIngredients] = useState([] as string[])
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -809,7 +849,7 @@ function App() {
               <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
             )
           }/>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe()}>Get Recipe</Button>
           {recipe.title && 
             <Recipe 
               title={recipe.title} 
@@ -831,7 +871,7 @@ Perfect! We now have our list of ingredients, but we're still not really using i
 ```tsx
 const [ingredients, setIngredients] = useState([] as string[])
   
-  const getRecipe = async () => {
+  async function getRecipe() {
     const requestBody = JSON.stringify({ingredients: ingredients})
     .....
   }
