@@ -887,3 +887,15 @@ const [ingredients, setIngredients] = useState([] as string[])
 Perfect! Now we have all our functionality, next you can choose a couple of different tasks, either improving the layout and design to make things look nicer, or implementing more functionality in the backend and frontend to also make use of an image generator, to create a fitting image to the recipe.
   
 </details>
+
+## Open waters ⛵️
+We're now done with the most important parts of the app, but there's still plenty of improvements and features that may be added. In this next part, we give you three optional, independent subjects to explore, with varying difficulty. 
+
+### 🟢 Easy - Deployment
+Want to show of this piece of work to your grandparents? Sure, just have them clone the repo with git, install the dependencies with npm and run it on localhost. OR EVEN BETTER: Make the page just as accessible as vg.no. Sound tempting? Head over to [Deployment](./deployment.md) and have a look.
+
+### 🟡 Medium - Styling
+The app is currently functional but wouldn't exactly bring home a [Red Dot Award](https://www.red-dot.org/design-concept?gclid=CjwKCAiA_6yfBhBNEiwAkmXy55ZB9Tuvl96iEoM4_Comt9va0dC4kknJ2WjI3XeLZ-8sibTP7QlOnRoC3v0QAvD_BwE) (yet). If you'd like to pimp out your page and make it look even better, check out the [Styling](./styling.md) guide and have a look.
+
+### 🔴 Hard - Generate AI images based on the recipe
+Didn't think that the app had enough AI? Wanted some more visuals? This part is quite a bit more technical than the others, and involves traversing into the depths of the backend and building a new endpoint in the API, and frontend changes to call this API. Much like a true full stack developer! Up for a challenge? Check out [DALL-E](./dall-e.md) to get started! 
