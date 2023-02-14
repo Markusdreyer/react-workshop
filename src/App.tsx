@@ -3,9 +3,16 @@ import Button from '@mui/material/Button';
 
 function App() {
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
-    await fetch("http://localhost:8000/recipes", {
+  async function getRecipe {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +26,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button variant={'outlined'} onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe()}>Get Recipe</Button>
       </Box>
   );
 }
