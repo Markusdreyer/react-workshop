@@ -78,7 +78,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
 
   ```ts
-  const myFunction = () => {
+  function myFunction() {
       console.log("Hello world");
     }
   ```
@@ -97,12 +97,12 @@ git clone https://github.com/Markusdreyer/react-workshop.git
 
     function App() {
 
-        const getRecipe = () => {
+        function getRecipe() {
                 console.log("Hello world")
             }
 
         return (
-            <Button onClick={() => getRecipe()}>Get Recipe</Button>
+            <Button onClick={getRecipe}>Get Recipe</Button>
         );
     }
 
@@ -149,7 +149,7 @@ git clone https://github.com/Markusdreyer/react-workshop.git
   ```tsx
     return (
         <div>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
         </div>
       );
   ```
@@ -170,11 +170,11 @@ git clone https://github.com/Markusdreyer/react-workshop.git
     <summary>:sparkles:Show solution:sparkles:</summary>
 
 
-  ```ts
+  ```tsx
     return (
       <Box>
         YourName's Magic Cookbook
-        <Button onClick={() => getRecipe()}>Get Recipe</Button>
+        <Button onClick={getRecipe}>Get Recipe</Button>
       </Box>
       );
   ```
@@ -223,7 +223,7 @@ Let's encapsulate this request into the `getRecipe` function we already made:
 
 ```ts
 //The async keyword allows us to to use "await" to perform asynchronous operations, such as communicating with the backend
-const getRecipe = async () => {
+async function getRecipe() {
     //Hardcoded list of ingredients. We'll come back to this later, but we need some data to work with for now.
     const requestBody = JSON.stringify({
         ingredients: [
@@ -259,7 +259,7 @@ import Button from '@mui/material/Button';
 
 function App() {
   
-  const getRecipe = async () => {
+  function getRecipe() {
     const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
@@ -275,7 +275,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
       </Box>
   );
 }
@@ -595,7 +595,7 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
+  async function getRecipe() {
     const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
@@ -611,7 +611,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
       </Box>
   );
 }
@@ -643,7 +643,7 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
+  async function getRecipe() {
     const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
@@ -659,7 +659,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
           <Recipe title={recipe.title} description={recipe.description} ingredients={recipe.ingredients} steps={recipe.steps}/>
       </Box>
   );
@@ -693,7 +693,7 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
+  async function getRecipe() {
     const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
@@ -709,7 +709,7 @@ function App() {
   return (
       <Box>
           YourName's Magic Cookbook
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
           {recipe.title && 
             <Recipe 
               title={recipe.title} 
