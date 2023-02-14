@@ -263,7 +263,7 @@ import Button from '@mui/material/Button';
 
 function App() {
   
-  async function getRecipe() => {
+  async function getRecipe() {
     const requestBody = JSON.stringify({
         ingredients: [
             "tomato", 
