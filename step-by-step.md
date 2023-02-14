@@ -188,7 +188,7 @@ All right, now we've finished adding the header! You may have noticed that we on
         return (
             <>
               <Box>YourName's Magic Cookbook</Box>
-              <Button onClick={getRecipe()}>Get Recipe</Button>
+              <Button onClick={getRecipe}>Get Recipe</Button>
             </>
         );
     }
@@ -298,7 +298,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
       </>
   );
 }
@@ -467,8 +467,8 @@ function NameList(props: names){
   return(
     <Box>
         <List>
-            {props.names.map((name) => (
-                <ListItem>{name.firstName} {name.lastName}</ListItem>
+            {props.names.map((name, index) => (
+                <ListItem key={index}>{name.firstName} {name.lastName}</ListItem>
             ))}
         </List>
     </Box>
@@ -517,7 +517,7 @@ const ExampleRecipeData = {
   <summary>:sparkles:Show solution:sparkles:</summary>
   
 ```tsx
-import { Box } from "@mui/material";
+import { Box, List, ListItem } from "@mui/material";
 
 export interface RecipeData{
     title: string
@@ -528,20 +528,20 @@ export interface RecipeData{
 
 function Recipe(props: RecipeData){
     return (
-      <>
-        <Box>{props.title}</Box>
-        <Box>{props.description}</Box>
-        <List>
-            {props.ingredients.map((ingredient) => (
-                <ListItem>{ingredient}</ListItem>
-            ))}
-        </List>
-        <List>
-            {props.steps.map((step) => (
-                <ListItem>{step}</ListItem>
-            ))}
-        </List>
-      </>
+        <>
+          <Box>{props.title}</Box>
+          <Box>{props.description}</Box>
+          <List>
+              {props.ingredients.map((ingredient, index) => (
+                  <ListItem key={index}>{ingredient}</ListItem>
+              ))}
+          </List>
+          <List>
+              {props.steps.map((step, index) => (
+                  <ListItem key={index}>{step}</ListItem>
+              ))}
+          </List>
+       </>
     )
 }
   
@@ -626,7 +626,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
       </>
   );
 }
@@ -683,7 +683,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
           <Recipe title={recipe.title} description={recipe.description} ingredients={recipe.ingredients} steps={recipe.steps}/>
       </>
   );
@@ -741,7 +741,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
           {recipe.title && 
             <Recipe 
               title={recipe.title} 
@@ -814,65 +814,61 @@ Try doing this now.
   <summary>:sparkles:Show solution:sparkles:</summary>
   
 ```tsx
-import { Box } from '@mui/material';
-import Button from '@mui/material/Button';
-import Recipe, { RecipeData } from './components/Recipe';
-import { useState } from 'react';
-import IngredientOptions from '../Files/Ingredients.json'
+import { Autocomplete, Button, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import Recipe, { RecipeData } from "./components/Recipe";
+import { useState } from "react";
+import IngredientOptions from './files/Ingredients.json'
 
 function App() {
-  const [recipe, setRecipe] = useState({} as RecipeData)
-  const [ingredients, setIngredients] = useState([] as string[])
-  
-  async function getRecipe() {
-    const requestBody = JSON.stringify({
-        ingredients: [
-            "tomato", 
-            "mozzarella", 
-            "basil", 
-            "chiocciole pasta", 
-            "olive oil"
-        ]
-    })
-    await fetch("http://localhost:8000/recipes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: requestBody,
-    })
-      .then((response) => response.json())
-      .then((data) => setRecipe(data));
+    const [recipe, setRecipe] = useState({} as RecipeData)
+    const [ingredients, setIngredients] = useState([] as string[])
+    
+    async function getRecipe() {
+      const requestBody = JSON.stringify({
+          ingredients: ingredients
+      })
+      await fetch("http://localhost:8000/recipes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: requestBody,
+      })
+        .then((response) => response.json())
+        .then((data) => setRecipe(data));
+    }
+    
+    return (
+        <>
+            <Box>YourName's Magic Cookbook</Box>
+            <Autocomplete 
+              multiple // Allows you to select multiple items
+              filterSelectedOptions // Filters out selected items
+              disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
+              options={IngredientOptions} // The options shown in the dropdown menu
+              onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
+                setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
+              )
+            }/>
+            <Button onClick={getRecipe}>Get Recipe</Button>
+            {recipe.title && 
+              <Recipe 
+                title={recipe.title} 
+                description={recipe.description} 
+                ingredients={recipe.ingredients} 
+                steps={recipe.steps}
+              />
+            }
+        </>
+    );
   }
-  
-  return (
-      <>
-          <Box>YourName's Magic Cookbook</Box>
-          <Autocomplete 
-            multiple // Allows you to select multiple items
-            filterSelectedOptions // Filters out selected items
-            disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
-            options={IngredientOptions} // The options shown in the dropdown menu
-            onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
-              setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
-            )
-          }/>
-          <Button onClick={getRecipe()}>Get Recipe</Button>
-          {recipe.title && 
-            <Recipe 
-              title={recipe.title} 
-              description={recipe.description} 
-              ingredients={recipe.ingredients} 
-              steps={recipe.steps}
-            />
-          }
-      </>
-  );
-}
+
 export default App;
+
 
 ```
 </details>
