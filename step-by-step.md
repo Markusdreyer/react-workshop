@@ -338,9 +338,11 @@ interface interfaceName{
   propertyName1: propertyType1
   propertyName2: propertyType2
 }
+```
   
 To use this interface in other components, we usually have to add an export before the interface, e.g.
-  
+
+```
 export interface InterfaceName {
   ....
 }
@@ -611,9 +613,10 @@ So, next we want to use the actual recipe data! Lets use our Recipe component an
 ```tsx
   <Recipe title={recipe.title} description={recipe.description}....../>
   
-  Notice that we are writing this as <Recipe ... /> instead of <Recipe ...></Recipe>
-  This is just a simplification and can make the code cleaner and easier to read when no props are passed 
 ```
+  
+Notice that we are writing this as `<Recipe ... />` instead of `<Recipe ...></Recipe>`
+This is just a simplification and can make the code cleaner and easier to read when no props are passed
   
 Now try implementing this yourself!
   
