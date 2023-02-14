@@ -63,8 +63,87 @@ and `npm start`
 
 </details>
 
+## Step 1 - Adding some text
+<details>
+  <summary>:wrench: Adding more components</summary>
 
-## Step 1 - A simple button and an empty function
+  <br>Now that we have the project running, we want to add some visual element, like some text at the top of the page, for example "`Your Name`'s Magic Cookbok". 
+  Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
+
+  For example:
+
+  ```tsx
+  return (
+    <>
+      <Box> I am a child '<>' </Box>
+      <Box> I am another child of '<>'</Box>
+    </>
+  );
+
+  ```
+  
+  Is OK. In this example, `<>` is the parent element, and the two `<Box>` elements are child elements. The parent element contains and wraps around the two child elements. However, 
+              
+  ```tsx
+  return (
+    <>
+      <Box> I am a child '<>' </Box>
+    </>
+    <Box> I am another parent element!</Box>
+  );
+
+  ```
+is not OK, as it contains two `parent` elements, both `<>` and `<Box>`.
+  
+
+  Now, if you look in your `App.tsx` file, you can see that there is already a `<> </>`element, we can use this as our parent element when adding new elements.
+
+Now you can go ahead and use a `<Box>` element, see an example of how it can be used below.
+
+  ```tsx
+import { Box } from "@mui/system";
+
+function App() {
+  return (
+    <Box>This is some text</Box>
+  )
+}
+
+export default App
+
+  ```
+
+Now lets combine this, add the `<Box>` element with the text `YourName's Magic Cookbook`.
+
+<details>
+    <summary>:sparkles:Show solution:sparkles:</summary>
+
+
+```tsx
+import { Box } from "@mui/system";
+
+function App() {
+  return (
+    <>
+      <Box>This is some text</Box>
+    </>
+  )
+}
+
+export default App
+```
+</details>
+  
+All right, now we've finished adding the header! You may have noticed that we only really have a <Box> element, and as such didn't really need a parent element, but it will be important later on as we start using more elements and components. So for the next step, we'll be adding a bit of simple interaction with a button!
+
+</details>
+
+</details>
+
+
+</details>
+
+## Step 2 - A simple button and an empty function
 <details>
   <summary>:wrench: Getting started</summary><br>
 
@@ -102,12 +181,15 @@ and `npm start`
 
     function App() {
 
-        const getRecipe = () => {
+        function getRecipe() {
                 console.log("Hello world")
             }
 
         return (
-            <Button onClick={() => getRecipe()}>Get Recipe</Button>
+            <>
+              <Box>YourName's Magic Cookbook</Box>
+              <Button onClick={getRecipe}>Get Recipe</Button>
+            </>
         );
     }
 
@@ -121,77 +203,6 @@ and `npm start`
 
   Once the console is open, you can use it to view output from your JavaScript code, check the values of variables, and run code directly in the console. This is useful for testing and debugging your code, as well as for exploring the behavior of JavaScript and the web platform.
   Try using it now to see what happens when you click the button on your website.
-
-</details>
-
-## Step 2 - Add a header and center the components
-<details>
-  <summary>:wrench: Adding more components</summary>
-
-  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, for example "`Your Name`'s Magic Cookbok". 
-  Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
-
-  For example:
-
-  ```tsx
-  return (
-          <>
-            <p> I am a child '<>' </p>
-            <p> I am another child of '<>'</p>
-          </>
-        );
-
-  ```
-
-  In this example, div is the parent element, and the two p elements are child elements. The parent element div contains and wraps around the two child elements.
-
-  Now, you can go ahead and add a parent element which wraps around our existing button.
-
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-
-  ```tsx
-    return (
-        <>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
-        </>
-      );
-  ```
-</details>
-
-
-  The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more later on and use more of the existing material-ui components. So we're going to use the `<Box>` component
-
-  ```tsx
-  <Box>This is some text</Box>
-
-  ```
-
-Now lets combine this, add the `<Box>` element with the text `YourName's Magic Cookbook` and wrap the `<Box>` and the `<Button>` elements in a parent element
-
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-
-  ```tsx
-    return (
-      <>
-        YourName's Magic Cookbook
-        <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      </>
-      );
-  ```
-</details>
-  
-All right, now we've finished adding the header! Next step, we'll start having the button do something.
-
-</details>
-
-
-
-</details>
-
 
 </details>
 
@@ -227,7 +238,7 @@ Let's encapsulate this request into the `getRecipe` function we already made:
 
 ```tsx
 //The async keyword allows us to to use "await" to perform asynchronous operations, such as communicating with the backend
-const getRecipe = async () => {
+async function getRecipe() {
     //Hardcoded list of ingredients. We'll come back to this later, but we need some data to work with for now.
     const requestBody = JSON.stringify({
         ingredients: [
@@ -263,8 +274,16 @@ import Button from '@mui/material/Button';
 
 function App() {
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -279,7 +298,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
       </>
   );
 }
@@ -338,9 +357,11 @@ interface interfaceName{
   propertyName1: propertyType1
   propertyName2: propertyType2
 }
+```
   
 To use this interface in other components, we usually have to add an export before the interface, e.g.
-  
+
+```
 export interface InterfaceName {
   ....
 }
@@ -446,8 +467,8 @@ function NameList(props: names){
   return(
     <Box>
         <List>
-            {props.names.map((name) => (
-                <ListItem>{name.firstName} {name.lastName}</ListItem>
+            {props.names.map((name, index) => (
+                <ListItem key={index}>{name.firstName} {name.lastName}</ListItem>
             ))}
         </List>
     </Box>
@@ -496,7 +517,7 @@ const ExampleRecipeData = {
   <summary>:sparkles:Show solution:sparkles:</summary>
   
 ```tsx
-import { Box } from "@mui/material";
+import { Box, List, ListItem } from "@mui/material";
 
 export interface RecipeData{
     title: string
@@ -507,20 +528,20 @@ export interface RecipeData{
 
 function Recipe(props: RecipeData){
     return (
-      <>
-        <Box>{props.title}</Box>
-        <Box>{props.description}</Box>
-        <List>
-            {props.ingredients.map((ingredient) => (
-                <ListItem>{ingredient}</ListItem>
-            ))}
-        </List>
-        <List>
-            {props.steps.map((step) => (
-                <ListItem>{step}</ListItem>
-            ))}
-        </List>
-      </>
+        <>
+          <Box>{props.title}</Box>
+          <Box>{props.description}</Box>
+          <List>
+              {props.ingredients.map((ingredient, index) => (
+                  <ListItem key={index}>{ingredient}</ListItem>
+              ))}
+          </List>
+          <List>
+              {props.steps.map((step, index) => (
+                  <ListItem key={index}>{step}</ListItem>
+              ))}
+          </List>
+       </>
     )
 }
   
@@ -581,8 +602,16 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -597,7 +626,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
       </>
   );
 }
@@ -611,9 +640,10 @@ So, next we want to use the actual recipe data! Lets use our Recipe component an
 ```tsx
   <Recipe title={recipe.title} description={recipe.description}....../>
   
-  Notice that we are writing this as <Recipe ... /> instead of <Recipe ...></Recipe>
-  This is just a simplification and can make the code cleaner and easier to read when no props are passed 
 ```
+  
+Notice that we are writing this as `<Recipe ... />` instead of `<Recipe ...></Recipe>`
+This is just a simplification and can make the code cleaner and easier to read when no props are passed
   
 Now try implementing this yourself!
   
@@ -629,8 +659,16 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -645,7 +683,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
           <Recipe title={recipe.title} description={recipe.description} ingredients={recipe.ingredients} steps={recipe.steps}/>
       </>
   );
@@ -679,8 +717,16 @@ import { useState } from 'react';
 function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+  async function getRecipe() {
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
@@ -695,7 +741,7 @@ function App() {
   return (
       <>
           <Box>YourName's Magic Cookbook</Box>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
+          <Button onClick={getRecipe}>Get Recipe</Button>
           {recipe.title && 
             <Recipe 
               title={recipe.title} 
@@ -768,57 +814,61 @@ Try doing this now.
   <summary>:sparkles:Show solution:sparkles:</summary>
   
 ```tsx
-import { Box } from '@mui/material';
-import Button from '@mui/material/Button';
-import Recipe, { RecipeData } from './components/Recipe';
-import { useState } from 'react';
-import IngredientOptions from '../Files/Ingredients.json'
+import { Autocomplete, Button, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import Recipe, { RecipeData } from "./components/Recipe";
+import { useState } from "react";
+import IngredientOptions from './files/Ingredients.json'
 
 function App() {
-  const [recipe, setRecipe] = useState({} as RecipeData)
-  const [ingredients, setIngredients] = useState([] as string[])
-  
-  const getRecipe = async () => {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
-    await fetch("http://localhost:8000/recipes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: requestBody,
-    })
-      .then((response) => response.json())
-      .then((data) => setRecipe(data));
+    const [recipe, setRecipe] = useState({} as RecipeData)
+    const [ingredients, setIngredients] = useState([] as string[])
+    
+    async function getRecipe() {
+      const requestBody = JSON.stringify({
+          ingredients: ingredients
+      })
+      await fetch("http://localhost:8000/recipes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: requestBody,
+      })
+        .then((response) => response.json())
+        .then((data) => setRecipe(data));
+    }
+    
+    return (
+        <>
+            <Box>YourName's Magic Cookbook</Box>
+            <Autocomplete 
+              multiple // Allows you to select multiple items
+              filterSelectedOptions // Filters out selected items
+              disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
+              options={IngredientOptions} // The options shown in the dropdown menu
+              onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
+                setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
+              )
+            }/>
+            <Button onClick={getRecipe}>Get Recipe</Button>
+            {recipe.title && 
+              <Recipe 
+                title={recipe.title} 
+                description={recipe.description} 
+                ingredients={recipe.ingredients} 
+                steps={recipe.steps}
+              />
+            }
+        </>
+    );
   }
-  
-  return (
-      <>
-          <Box>YourName's Magic Cookbook</Box>
-          <Autocomplete 
-            multiple // Allows you to select multiple items
-            filterSelectedOptions // Filters out selected items
-            disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
-            options={IngredientOptions} // The options shown in the dropdown menu
-            onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
-              setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
-            }}
-            renderInput={(params) => (
-              <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
-            )
-          }/>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
-          {recipe.title && 
-            <Recipe 
-              title={recipe.title} 
-              description={recipe.description} 
-              ingredients={recipe.ingredients} 
-              steps={recipe.steps}
-            />
-          }
-      </>
-  );
-}
+
 export default App;
+
 
 ```
 </details>
@@ -828,7 +878,7 @@ Perfect! We now have our list of ingredients, but we're still not really using i
 ```tsx
 const [ingredients, setIngredients] = useState([] as string[])
   
-  const getRecipe = async () => {
+  async function getRecipe() {
     const requestBody = JSON.stringify({ingredients: ingredients})
     .....
   }
