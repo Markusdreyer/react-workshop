@@ -82,7 +82,7 @@ and `npm start`
 
   ```
   
-  Is OK. In this example, `<>` is the parent element, and the two `<Box>` elements are child elements. The parent element contains and wraps around the two child elements.
+  Is OK. In this example, `<>` is the parent element, and the two `<Box>` elements are child elements. The parent element contains and wraps around the two child elements. However, 
               
   ```tsx
   return (
@@ -93,7 +93,7 @@ and `npm start`
   );
 
   ```
-Is not OK, as it contains two `parent` elements, both `<>` and `<Box>`.
+is not OK, as it contains two `parent` elements, both `<>` and `<Box>`.
   
 
   Now, if you look in your `App.tsx` file, you can see that there is already a `<> </>`element, we can use this as our parent element when adding new elements.
