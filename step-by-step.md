@@ -291,7 +291,7 @@ export default App;
 
 Now we want to create a new component for recipe related things. 
   
-First, create a folder named `components` under the `src` folder. If you're using Visual Studio Code, you can right click the `src` directory and click create new folder and name this components. Now right click the `components` folder and click create new file, lets name this new file Recipe.tsx 
+First, create a folder named `components` under the `src` folder. If you're using Visual Studio Code, you can right click the `src` directory and click create new folder and name this components. Then right click the `components` folder and click create new file. Let's name this new file `Recipe.tsx`
 
 Next up, we'll have a look at how the data in the recipe is structured.
 
