@@ -63,8 +63,87 @@ and `npm start`
 
 </details>
 
+## Step 1 - Adding some text
+<details>
+  <summary>:wrench: Adding more components</summary>
 
-## Step 1 - A simple button and an empty function
+  <br>Now that we have the project running, we want to add some visual element, like some text at the top of the page, for example "`Your Name`'s Magic Cookbok". 
+  Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
+
+  For example:
+
+  ```tsx
+  return (
+    <>
+      <Box> I am a child '<>' </Box>
+      <Box> I am another child of '<>'</Box>
+    </>
+  );
+
+  ```
+  
+  Is OK. In this example, `<>` is the parent element, and the two `<Box>` elements are child elements. The parent element contains and wraps around the two child elements.
+              
+  ```tsx
+  return (
+    <>
+      <Box> I am a child '<>' </Box>
+    </>
+    <Box> I am another parent element!</Box>
+  );
+
+  ```
+Is not OK, as it contains two `parent` elements, both `<>` and `<Box>`.
+  
+
+  Now, if you look in your `App.tsx` file, you can see that there is already a `<> </>`element, we can use this as our parent element when adding new elements.
+
+Now you can go ahead and use a `<Box>` element, see an example of how it can be used below.
+
+  ```tsx
+import { Box } from "@mui/system";
+
+function App() {
+  return (
+    <Box>This is some text</Box>
+  )
+}
+
+export default App
+
+  ```
+
+Now lets combine this, add the `<Box>` element with the text `YourName's Magic Cookbook`.
+
+<details>
+    <summary>:sparkles:Show solution:sparkles:</summary>
+
+
+```tsx
+import { Box } from "@mui/system";
+
+function App() {
+  return (
+    <>
+      <Box>This is some text</Box>
+    </>
+  )
+}
+
+export default App
+```
+</details>
+  
+All right, now we've finished adding the header! You may have noticed that we only really have a <Box> element, and as such didn't really need a parent element, but it will be important later on as we start using more elements and components. So for the next step, we'll be adding a bit of simple interaction with a button!
+
+</details>
+
+</details>
+
+
+</details>
+
+## Step 2 - A simple button and an empty function
 <details>
   <summary>:wrench: Getting started</summary><br>
 
@@ -107,7 +186,10 @@ and `npm start`
             }
 
         return (
-            <Button onClick={getRecipe()}>Get Recipe</Button>
+            <>
+              <Box>YourName's Magic Cookbook</Box>
+              <Button onClick={getRecipe()}>Get Recipe</Button>
+            </>
         );
     }
 
@@ -121,77 +203,6 @@ and `npm start`
 
   Once the console is open, you can use it to view output from your JavaScript code, check the values of variables, and run code directly in the console. This is useful for testing and debugging your code, as well as for exploring the behavior of JavaScript and the web platform.
   Try using it now to see what happens when you click the button on your website.
-
-</details>
-
-## Step 2 - Add a header and center the components
-<details>
-  <summary>:wrench: Adding more components</summary>
-
-  <br>Now that we have our simple button, we want to add a header, a text at the top of the page, for example "`Your Name`'s Magic Cookbok". 
-  Components in react can however only return one main parent element. A parent element is an HTML-like element that contains one or more child elements. The child elements are nested within the parent element and are considered to be a part of the parent element.
-
-  For example:
-
-  ```tsx
-  return (
-          <>
-            <p> I am a child '<>' </p>
-            <p> I am another child of '<>'</p>
-          </>
-        );
-
-  ```
-
-  In this example, div is the parent element, and the two p elements are child elements. The parent element div contains and wraps around the two child elements.
-
-  Now, you can go ahead and add a parent element which wraps around our existing button.
-
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-
-  ```tsx
-    return (
-        <>
-          <Button onClick={() => getRecipe()}>Get Recipe</Button>
-        </>
-      );
-  ```
-</details>
-
-
-  The next step is to add the header, usually we could just add some text above the button, or use existing html elements such as `<h1> <h2>` etc. but we want to customize this a bit more later on and use more of the existing material-ui components. So we're going to use the `<Box>` component
-
-  ```tsx
-  <Box>This is some text</Box>
-
-  ```
-
-Now lets combine this, add the `<Box>` element with the text `YourName's Magic Cookbook` and wrap the `<Box>` and the `<Button>` elements in a parent element
-
-<details>
-    <summary>:sparkles:Show solution:sparkles:</summary>
-
-
-  ```tsx
-    return (
-      <>
-        YourName's Magic Cookbook
-        <Button onClick={() => getRecipe()}>Get Recipe</Button>
-      </>
-      );
-  ```
-</details>
-  
-All right, now we've finished adding the header! Next step, we'll start having the button do something.
-
-</details>
-
-
-
-</details>
-
 
 </details>
 
