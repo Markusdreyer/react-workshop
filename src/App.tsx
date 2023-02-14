@@ -7,7 +7,15 @@ function App() {
   const [recipe, setRecipe] = useState({} as RecipeData)
   
   async function getRecipe()  {
-    const requestBody = JSON.stringify({ingredients: ["tomato", "mozzarella", "basil", "chiocciole pasta", "olive oil"]})
+    const requestBody = JSON.stringify({
+        ingredients: [
+            "tomato", 
+            "mozzarella", 
+            "basil", 
+            "chiocciole pasta", 
+            "olive oil"
+        ]
+    })
     await fetch("http://localhost:8000/recipes", {
       method: "POST",
       headers: {
