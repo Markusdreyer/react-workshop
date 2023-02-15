@@ -219,6 +219,7 @@ function App() {
 
 export default App;
 ```
+</details>
     
 So now we want to center all our elements, and the text in the header e.g. `YourName's Magic Cookbook`. One way of centering all our elements is to wrap the `<Autocomplete>` and `<Button>` components within a `<Box>`and to do the same for our `loadingIndicator` and `<Recipe>` components and applying styling to these `<Box>` elements. Underneath are examples of some styling options you can use
         
@@ -331,7 +332,5 @@ function App() {
 export default App;
 
 ```
-
 </details>
-
 </details>
