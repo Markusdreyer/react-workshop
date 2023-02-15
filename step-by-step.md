@@ -884,10 +884,166 @@ const [ingredients, setIngredients] = useState([] as string[])
   }
 ```
   
-Perfect! Now we have all our functionality, next you can choose a couple of different tasks, either improving the layout and design to make things look nicer, or implementing more functionality in the backend and frontend to also make use of an image generator, to create a fitting image to the recipe.
+Well done! The last step now is adding a loading indicator (as it can take a while to get a response at times). 
   
 </details>
 
+      
+## Step 7 - Adding a loading indicator
+<details>
+  <summary>:wrench: Lets load up </summary>
+  
+<br> So time to get get loading indicator in, this should be easy enough for you now after having completed the other steps. First off, we're going to use the following component `<CircularProgress/>`. In addition, we probably don't want this loading indicator to show all the time, we only want it to show while we're waiting for a response from the api. So again we can go ahead and either implement some conditional rendering, or use a function. Lets have a look at the different options.
+  
+```tsx
+import { CircularProgress } from "@mui/material";
+  
+function App(){
+  const [loading, setLoading] = useState(false);
+  
+  function loadingIndicator(){
+    if (loading){
+      return (<CircularProgress/>)
+  
+  return(
+    {loadingIndicator()}
+  )
+}
+  
+export default App
+```
+  
+Or we can use
+  
+```tsx
+import { CircularProgress } from "@mui/material";
+  
+function App(){
+  const [loading, setLoading] = useState(false);
+  
+  return(
+    {loading && (
+      <CircularProgress/>
+    )}
+  )
+}
+  
+export default App
+```
+  
+Which one to use depends a bit on preference, in some cases it is wise to use functions or even components if the element is large, this often makes the code much easier to maintain. Try adding one of the options to your code now!
+
+  
+<details>
+  <summary>:sparkles:Show solution:sparkles:</summary>
+  
+  
+```tsx
+import { Autocomplete, Button, CircularProgress, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import Recipe, { RecipeData } from "./components/Recipe";
+import { useState } from "react";
+import IngredientOptions from './files/Ingredients.json'
+
+function App() {
+    const [recipe, setRecipe] = useState({} as RecipeData)
+    const [loading, setLoading] = useState(false)
+    const [ingredients, setIngredients] = useState([] as string[])
+    
+    async function getRecipe() {
+      const requestBody = JSON.stringify({
+          ingredients: ingredients
+      })
+      await fetch("http://localhost:8000/recipes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: requestBody,
+      })
+        .then((response) => response.json())
+        .then((data) => setRecipe(data));
+    }
+  
+    function loadingIndicator(){
+      if (loading){
+          return (<CircularProgress/>)
+      }
+    }
+    
+    return (
+        <>
+            <Box>YourName's Magic Cookbook</Box>
+            <Autocomplete 
+              multiple // Allows you to select multiple items
+              filterSelectedOptions // Filters out selected items
+              disableCloseOnSelect // Prevents closing the dropdown menu on selecting an item
+              options={IngredientOptions} // The options shown in the dropdown menu
+              onChange={(event: any, newValue: string[]) => { // Handles changes, allowing you to set a state with the new values
+                setIngredients(newValue); // Here we're using a [ingredient, setIngredient] = useState([""]) state
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Ingredients" /> // The input field, showing what you type if you're using the built in search function
+              )
+            }/>
+            <Button onClick={getRecipe}>Get Recipe</Button>
+            {loadingIndicator()}
+            {recipe.title && 
+              <Recipe 
+                title={recipe.title} 
+                description={recipe.description} 
+                ingredients={recipe.ingredients} 
+                steps={recipe.steps}
+              />
+            }
+        </>
+    );
+  }
+
+export default App;
+```
+</details>
+
+So now, you're probably noticing that the loading indicator is appearing beside the button, lets move this below our button by wrapping a `<Box>` component around it.               
+
+```tsx
+function loadingIndicator(){
+  if (loading){
+    return (
+      <Box>
+          <CircularProgress/>
+      </Box>
+    )
+  }
+}
+```
+
+Furthermore, we actually have to set if it is loading or not, we can do this in our existing getRecipe function. 
+  
+```tsx
+async function getRecipe() {
+  setLoading(true) // set loading to true as soon as we use the function
+  const requestBody = JSON.stringify({
+    ingredients: ingredients
+  })
+  await fetch("http://localhost:8000/recipes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: requestBody,
+  })
+    .then((response) => response.json())
+    .then((data) => setRecipe(data))
+    .finally(() => setLoading(false)); // The finally is called when the response is either fulfilled or rejected, and sets the loading to false.
+}
+```
+  
+Perfect! Now we have all our functionality in place, next you can choose a couple of different tasks, either improving the layout and design to make things look nicer, or implementing more functionality in the backend and frontend to also make use of an image generator, to create a fitting image to the recipe.
+  
+</details>
+
+      
 ## Open waters ⛵️
 We're now done with the most important parts of the app, but there's still plenty of improvements and features that may be added. In this next part, we give you three optional, independent subjects to explore, with varying difficulty. 
 
