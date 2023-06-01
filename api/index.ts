@@ -21,51 +21,59 @@ app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
 
-app.post("/recipes", async (req: Request, res: Response) => {
-  console.info("Received recipe request with request body: ", req.body)
-  const ingredients: [string] = req.body.ingredients;
-  if(!ingredients || ingredients.length < 1) {
-    const error = { message: "No ingredients provided, aborting OpenAI request"}
-    console.error(error.message)
-    res.status(400).send(error)
-    return
-  }
-  
-  const format = `
-    {
-      "title": String,
-      "description" String,
-      "ingredients": []String,
-      "steps": []String,
+
+  app.post("/recipes", async (req: Request, res: Response) => {
+    console.info("Received recipe request with request body: ", req.body)
+    const ingredients: [string] = req.body.ingredients;
+    if(!ingredients || ingredients.length < 1) {
+      const error = { message: "No ingredients provided, aborting OpenAI request"}
+      console.error(error.message)
+      res.status(400).send(error)
+      return
     }
-  `;
-  const response = await openAIRequest(ingredients, format);
+    
+    const format = `
+      {
+        "title": String,
+        "description" String,
+        "ingredients": []String,
+        "steps": []String,
+      }
+    `;
+    try {
+    const response = await openAIRequest(ingredients, format);
+    
+    if (!response) return res.send("No response from OpenAI");
+    if (!response.data) return res.send("No data from OpenAI");
+    if (response.data.choices.length < 1) return res.send("No recipe found");
+  
 
-  if (!response) return res.send("No response from OpenAI");
-  if (!response.data) return res.send("No data from OpenAI");
-  if (response.data.choices.length < 1) return res.send("No recipe found");
+    const recipe = response.data.choices[0].text;
 
-  const recipe = response.data.choices[0].text;
-
-  try {
-    JSON.parse(recipe);
-  } catch (e) {
-    res.send("No recipe found");
+    try {
+      JSON.parse(recipe);
+    } catch (e) {
+      res.send("No recipe found");
+    }
+    res.send(recipe);
   }
+  catch(error){
+    console.log(error)
+    res.status(404).send(error)
+  }})
+  
 
-  res.send(recipe);
-});
 
 const openAIRequest = (ingredients: Array<string>, format: string) => {
   return openai.createCompletion({
     model: "text-davinci-003",
     prompt:
-      "Create a recipe using metric measurements that uses exclusively the following ingredients, and nothing else: " +
+      "Create a recipe using metric measurements that uses exclusively some or all of the following ingredients, and nothing else: " +
       ingredients +
       "in the following format: " +
       format,
     temperature: 0.3,
-    max_tokens: 1000,
+    max_tokens: 1200,
     top_p: 1.0,
     frequency_penalty: 0,
     presence_penalty: 0,

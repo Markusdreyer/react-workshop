@@ -26,7 +26,7 @@ function MagicButton(props: MagicButtonProps){
                 backgroundColor: props.buttonColor.background,
                 border: props.borderSize + " solid " + props.buttonColor.border
             }}>
-            Do Magic
+            Create Recipe
         </Button>
     )
 }

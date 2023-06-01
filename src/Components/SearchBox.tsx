@@ -72,7 +72,7 @@ function SearchBox(props: SearchBoxProps ) {
             variant="outlined"
           />
         )}
-        sx={{ width:"80%", backgroundColor: props.searchColor.background, opacity: 0.9,
+        sx={{ width:"75%", backgroundColor: props.searchColor.background, opacity: 0.9,
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
           border: '1px solid ' + props.searchColor.border
         },

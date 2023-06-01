@@ -21,7 +21,7 @@ function App() {
         loading={loading} 
         Header={
           <Header 
-            name={"Jack"} 
+            name={"Codepub"} 
             fontSize={"28px"} 
             color={"#232323"}
           />
